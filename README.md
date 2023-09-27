@@ -6,9 +6,9 @@
 
 ## Brew
 
-Install from Brewfile: `brew bundle --file=~/dotfiles/macos/Brewfile`  
-Dump to Brewfile: `brew bundle dump --file=~/dotfiles/macos/Brewfile --describe --force`  
-Match Brewfile: `brew bundle --file=~/dotfiles/macos/Brewfile cleanup`  
+Install from Brewfile: `brew bundle --file=~/Documents/GitHub/dotfiles/macos/Brewfile`  
+Dump to Brewfile: `brew bundle dump --file=~/Documents/GitHub/dotfiles/macos/Brewfile --describe --force`  
+Match Brewfile: `brew bundle --file=~/Documents/GitHub/dotfiles/macos/Brewfile cleanup`  
 
 Housekeeping with Brew: https://mac.install.guide/homebrew/8.html
 
