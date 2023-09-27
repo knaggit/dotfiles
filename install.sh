@@ -3,8 +3,8 @@
 # Install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ## Run these three commands in your terminal to add Homebrew to your PATH:
-echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/mgr/.zprofile
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/mgr/.zprofile
+echo '# Set PATH, MANPATH, etc., for Homebrew.' >> ~/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Install dependencies with brew
