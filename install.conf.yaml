@@ -1,12 +1,20 @@
-- clean: ['~']
+- clean: ["~"]
 
 - link:
-#    "~/Library/Application Support/Code/User/keybindings.json": vscode/keybindings.json
-#    "~/Library/Application Support/Code/User/settings.json": vscode/settings.json
-#    "~/Library/LaunchAgents/Timemator.restart.plist": macos/Timemator.restart.plist
+    "~/Library/LaunchAgents/Timemator.restart.plist": macos/Timemator.restart.plist
+    ~/.finicky.js: finicky/.finicky.js
     ~/.gitconfig: git/.gitconfig
     ~/.gitignore: git/.gitignore
     ~/.ssh/config: ssh/config
- #   ~/.tmux.conf: tmux/.tmux.conf
+    ~/.svgo.config.js: svgo/.svgo.config.js
+    ~/.tmux.conf: tmux/.tmux.conf
     ~/.vimrc: vim/.vimrc
     ~/.zshrc: zsh/.zshrc
+    ~/.zsh_plugins.txt: zsh/.zsh_plugins.txt
+    ~/.fzf.zsh: zsh/.fzf.zsh
+    ~/.config/fish/config.fish: fish/config.fish
+    ~/.config/fish/fish_plugins: fish/fish_plugins
+    ~/.docker/config.json: docker/config.json
+    ~/.env.sh: shell/.env.sh
+    ~/.aliases.sh: shell/.aliases.sh
+    ~/.config/starship.toml: starship/starship.toml
