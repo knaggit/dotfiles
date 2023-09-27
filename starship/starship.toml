@@ -1,0 +1,30 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$all$fill$memory_usage$time$line_break\
+$character${custom.iterm_prompt_marker}\
+"""
+
+[custom.iterm_prompt_marker]
+when = '[ "$TERM_PROGRAM" = "iTerm.app" ]'
+format = "\u001b\\]133;A\u0007"
+ignore_timeout = true
+
+[time]
+disabled = false
+format = 'at ⏰ [\[$time\]]($style) '
+
+[fill]
+symbol = ' '
+
+[memory_usage]
+disabled = false
+threshold = 0
+format = '$symbol[$ram]($style) '
+
+[sudo]
+disabled = false
+
+[gcloud]
+disabled = true
