@@ -10,32 +10,42 @@ brew "jansson"
 brew "cask"
 # Command-line tool for Amazon Route 53
 brew "cli53"
+# Cloudflare Tunnel client (formerly Argo Tunnel)
+brew "cloudflared"
 # Tool that bootstraps your dotfiles
 brew "dotbot"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
 # GNU compiler collection
 brew "gcc"
 # Distributed revision control system
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Tool to measure maximum TCP and UDP bandwidth
+brew "iperf"
 # 'traceroute' and 'ping' in a single tool
 brew "mtr"
+# Benchmarks performance of many different types of networking
+brew "netperf"
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications
 brew "node"
+# Userspace Go implementation of WireGuard
+brew "wireguard-go"
 # Tool for managing your YubiKey configuration
 brew "ykman"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
-# Fork of youtube-dl with additional features and fixes
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
 # Command-line tool for the YubiKey PIV application
 brew "yubico-piv-tool"
-# Cloudflare Tunnel
-brew "cloudflare/cloudflare/cloudflared"
 # NextDNS DNS/53 to DoH Proxy
 brew "nextdns/tap/nextdns"
 # Ookla Speedtest
@@ -44,11 +54,15 @@ brew "teamookla/speedtest/speedtest"
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
+# Chromium based browser
+cask "arc"
+# Records audio from any application
+cask "audio-hijack"
 # Desktop password and login vault
 cask "bitwarden"
-# Desktop client for GitHub repositories
-cask "github"
-# Tool to optimize images to a smaller size
+# Voice and text chat software
+cask "discord"
+# Tool to optimise images to a smaller size
 cask "imageoptim"
 # System monitoring app
 cask "istat-menus"
@@ -56,18 +70,28 @@ cask "istat-menus"
 cask "keepassxc"
 # Host-based application firewall
 cask "little-snitch"
+# Cable-free audio router
+cask "loopback"
 # Online collaborative whiteboard platform
 cask "miro"
 # German banking and financial management software
 cask "moneymoney"
 # VPN client
 cask "mullvadvpn"
-# App to write, plan, collaborate, and get organized
+# App to write, plan, collaborate, and get organised
 cask "notion"
+# MikroTik Winbox
+cask "nrlquaker-winbox"
+# All-in-one bookmark manager
+cask "raindropio"
+# Spaced-repetition powered note-taking tool
+cask "remnote"
 # Instant messaging application focusing on security
 cask "signal"
 # Music streaming service
 cask "spotify"
+# Free and open-source OpenVPN client
+cask "tunnelblick"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
