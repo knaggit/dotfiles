@@ -1,5 +1,5 @@
 {
-  description = "Niklas dotfiles";
+  description = "knaggit's dotfiles";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -46,7 +46,7 @@
 
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
 
-      darwinConfigurations."Niklas-Machbuch" = darwin.lib.darwinSystem {
+      darwinConfigurations."Karrajor" = darwin.lib.darwinSystem {
         system = "aarch64-darwin"; # "x86_64-darwin" if you're using a pre M1 mac
         specialArgs = {
           inherit secretsPath;
@@ -68,29 +68,5 @@
           }
         ];
       };
-
-      nixosConfigurations."Niklas-Workstation" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit secretsPath;
-        };
-        modules = [
-          ./nixos/configuration.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.nik = import ./nix/home.nix;
-              inherit sharedModules;
-              extraSpecialArgs = {
-                inherit secretsPath;
-              };
-            };
-          }
-        ];
-      };
-
     };
 }

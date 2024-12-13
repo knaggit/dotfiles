@@ -1,4 +1,4 @@
-# Niks dotfiles
+# knaggit's dotfiles
 
 This is my personal dotfiles repository. It is managed with [Nix](https://nixos.org/) and [Nix-darwin](https://github.com/LnL7/nix-darwin). I use these dotfiles on macOS and on NixOS. But this guide is only for macOS.
 
@@ -6,8 +6,8 @@ This is my personal dotfiles repository. It is managed with [Nix](https://nixos.
 
 - [Install Nix](https://github.com/DeterminateSystems/nix-installer)
 - [Install Homebrew](https://brew.sh/)
-- Clone this repo to `~/dotfiles`
-- Run `nix run nix-darwin -- switch --flake ~/dotfiles`
+- Clone this repo to `~/Git/dotfiles`
+- Run `nix run nix-darwin -- switch --flake ~/Git/dotfiles`
 - Import uBlock setting via the import features in browser
 
 ## System software update
