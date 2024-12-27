@@ -1,6 +1,6 @@
 [user]
-	name = Niklas Ravnsborg
-	email = niklasravnsborg@gmail.com
+	name = Marjan Grabowski
+	email = git@knaggit.de
 	signingkey = 0C90DD8A0EE993DF8D587AF98360E6C58AE8F3ED
 [alias]
 	l = log --oneline -n 20

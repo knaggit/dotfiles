@@ -7,7 +7,7 @@ This is my personal dotfiles repository. It is managed with [Nix](https://nixos.
 - [Install Nix](https://github.com/DeterminateSystems/nix-installer)
 - [Install Homebrew](https://brew.sh/)
 - Clone this repo to `~/Git/dotfiles`
-- Run `nix run nix-darwin -- switch --flake ~/Git/dotfiles`
+- Run `nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake ~/Git/dotfiles`
 - Import uBlock setting via the import features in browser
 
 ## System software update
@@ -20,7 +20,7 @@ This is my personal dotfiles repository. It is managed with [Nix](https://nixos.
 
 ## SSH Setup
 
-Generate new keyfile: `ssh-keygen -t ed25519 -C "niklasravnsborg@gmail.com"`  
+Generate new keyfile: `ssh-keygen -t ed25519 -C "git@knaggit.de"`  
 Change password: `ssh-keygen -p -f ~/.ssh/id_ed25519`  
 Add password to keychain: `ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
 

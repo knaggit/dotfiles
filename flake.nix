@@ -13,16 +13,9 @@
       url = "github:ryanccn/nix-darwin-custom-icons";
     };
     home-manager = {
+      # home dir
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dotfiles-secrets = {
-      url = "git+ssh://git@github.com/niklasravnsborg/dotfiles-secrets?shallow=1";
-      flake = false;
     };
   };
 
@@ -32,15 +25,12 @@
       darwin,
       darwin-custom-icons,
       home-manager,
-      sops-nix,
       ...
     }@inputs:
     let
       sharedModules = [
-        inputs.sops-nix.homeManagerModules.sops
         ./tmux/tmux-module.nix
       ];
-      secretsPath = builtins.toString inputs.dotfiles-secrets;
     in
     {
 
@@ -48,22 +38,15 @@
 
       darwinConfigurations."Karrajor" = darwin.lib.darwinSystem {
         system = "aarch64-darwin"; # "x86_64-darwin" if you're using a pre M1 mac
-        specialArgs = {
-          inherit secretsPath;
-        };
         modules = [
           ./nix/darwin.nix
-          sops-nix.darwinModules.sops
           darwin-custom-icons.darwinModules.default
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
-              users.nik = import ./nix/home.nix;
+              users.knaggit = import ./nix/home.nix;
               inherit sharedModules;
-              extraSpecialArgs = {
-                inherit secretsPath;
-              };
             };
           }
         ];

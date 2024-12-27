@@ -9,7 +9,7 @@
       "locked": {
         "lastModified": 1727075708,
         "narHash": "sha256-F28Kqiqegi2XdPxV9HvdKE15GbDKHCsTIM5JUK4HYb0=",
-        "owner": "lasravnsborg",
+        "owner": "niklasravnsborg",
         "repo": "nix-darwin",
         "rev": "8f596aa6332f83315fef950de0bce80b777fca79",
         "type": "github"
@@ -33,23 +33,6 @@
         "owner": "ryanccn",
         "repo": "nix-darwin-custom-icons",
         "type": "github"
-      }
-    },
-    "dotfiles-secrets": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1732703755,
-        "narHash": "sha256-qFVefyoS8V6PaP6nZ7y0wdkCWmug106qpxLS/i5wq3Q=",
-        "ref": "refs/heads/main",
-        "rev": "effbbd8b7b845b5393c31f6bf1bc12a3648ab973",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/niklasravnsborg/dotfiles-secrets"
-      },
-      "original": {
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/niklasravnsborg/dotfiles-secrets"
       }
     },
     "home-manager": {
@@ -108,31 +91,9 @@
       "inputs": {
         "darwin": "darwin",
         "darwin-custom-icons": "darwin-custom-icons",
-        "dotfiles-secrets": "dotfiles-secrets",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-stable": "nixpkgs-stable",
-        "sops-nix": "sops-nix"
-      }
-    },
-    "sops-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1732575825,
-        "narHash": "sha256-xtt95+c7OUMoqZf4OvA/7AemiH3aVuWHQbErYQoPwFk=",
-        "owner": "Mic92",
-        "repo": "sops-nix",
-        "rev": "3433ea14fbd9e6671d0ff0dd45ed15ee4c156ffa",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Mic92",
-        "repo": "sops-nix",
-        "type": "github"
+        "nixpkgs-stable": "nixpkgs-stable"
       }
     }
   },
