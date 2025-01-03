@@ -154,11 +154,18 @@ in
     taps = [
       # Upgrade casks with `brew cu -a`
       "buo/cask-upgrade"
+      "mongodb/brew"
     ];
 
     brews = [
       # Although we already have it in home-manager, this gpg binary is the only one that Fork can find
       "gnupg"
+      "yubikey-personalization"
+      "ykman"
+      "pinentry-mac"
+      "mongodb-community@8.0"
+      "cloudflared"
+      "zbar"
     ];
 
     casks = [
@@ -183,13 +190,17 @@ in
 
       # Applications
       "arc" # Chromium based browser
+      "balenaetcher" # Flashing tool for linux distros on USB
       "bitwarden" # Desktop password and login vault
       "blackhole-2ch" # Virtual Audio Driver
       "cyberduck" # Server and cloud storage browser
+      "daisydisk" # Disk space utility
       "discord" # Voice and text chat software
       "finicky" # Utility for customizing which browser to start
       "imageoptim" # Tool to optimise images to a smaller size
+      "istat-menus@6" # iStat Menus vor top bar metrics of all ways
       "kitty" # GPU-based terminal emulator
+      "logi-options+" # Logitech mouse configuration
       "mos" # Smooths scrolling and set mouse scroll directions independently
       "musescore" # Open-source music notation software
       "nota" # Markdown files editor
@@ -199,6 +210,7 @@ in
       "raindropio" # Bookmark manager
       "rwts-pdfwriter" # Print driver for printing documents directly to a pdf file
       "signal" # Instant messaging application focusing on security
+      "timemator" # Automatic time-tracking application
       "the-unarchiver" # Unpacks archive files
       "topnotch" # Utility to hide the notch
       "visual-studio-code" # Open-source code editor

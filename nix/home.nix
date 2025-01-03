@@ -20,7 +20,7 @@ let
     cat = "bat -p";
   };
   homePath = config.home.homeDirectory;
-  configDir = "${homePath}/dotfiles";
+  configDir = "${homePath}/Git/dotfiles";
   dotfile = file: {
     source = config.lib.file.mkOutOfStoreSymlink "${configDir}/${file}";
   };
@@ -34,10 +34,11 @@ in
     any-nix-shell # Run nix-shell in any directory
     #   cloc # Count lines of code
     #   cloudflared # Cloudflare tunnel
-    #   delta # Syntax-highlighter for git and diff output
+    delta # Syntax-highlighter for git and diff output
+    exiftool # EXIF tool for file with EXIF data (photos)
     #   fd # Alternative to find
-    #   ffmpeg_7 # Play, record, convert, and stream audio and video
-    #   gh # GitHub command-line tool
+    ffmpeg_7 # Play, record, convert, and stream audio and video
+    gh # GitHub command-line tool
     #   gitui # Terminal ui for git
     gnused # GNU version of the famous stream editor
     gnutar # GNU version of the tar archiving utility
@@ -57,7 +58,8 @@ in
     tlrc # client for tldr: collaborative cheatsheets for console commands
     #   tree # Display directories as trees
     #   watch # Execute a program periodically
-    yt-dlp
+    wget # tool for downloading files from the web
+    yt-dlp # youtube-dl successor
     #   yq # Process YAML, JSON, XML, CSV and properties documents
 
     #   # Fun
@@ -74,7 +76,7 @@ in
 
   home.file = {
     ".env.sh" = dotfile "shell/.env.sh";
-
+    ".gpg.conf" = dotfile "gpg/gpg.conf";
     ".finicky.js" = dotfile "finicky/.finicky.js";
     ".gitconfig" = dotfile "git/.gitconfig";
     ".gitignore" = dotfile "git/.gitignore";

@@ -1,7 +1,7 @@
 [user]
-	name = Marjan Grabowski
-	email = git@knaggit.de
-	signingkey = 0C90DD8A0EE993DF8D587AF98360E6C58AE8F3ED
+	name = Marjan
+	email = hello@knaggit.de
+	signingkey = 0x7426E2F78A84EB06
 [alias]
 	l = log --oneline -n 20
 	st = status -s
@@ -28,3 +28,8 @@
 	syntax-theme = Coldark-Dark
 [interactive]
 	diffFilter = delta --color-only
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
