@@ -1,11 +1,11 @@
 # knaggit's dotfiles
 ## Intro
 
-This is my personal dotfiles repository. It is managed with [Nix](https://nixos.org/) and [Nix-darwin](https://github.com/LnL7/nix-darwin). I use these dotfiles on macOS and on NixOS. But this guide is only for macOS. For hardening [YubiKey-Guide](https://github.com/drduh/YubiKey-Guide) and [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide) is to be considered, also in this repository.
+This repository is managed with [Nix](https://nixos.org/) and [Nix-darwin](https://github.com/LnL7/nix-darwin). It's based on repositories from [niklasravnsborg](https://github.com/niklasravnsborg) and [drdruh](https://github.com/drduh).
 
 ## Precautions
 
-- Admin account is not used for day-to-day work, as recommend by [Apple](https://help.apple.com/machelp/mac/10.12/index.html#/mh11389) itself.
+- Admin account is not used for day-to-day work, as recommend by Apple[^1][^3] itself.
 
 ## Initial Setup
 
@@ -18,7 +18,7 @@ This is my personal dotfiles repository. It is managed with [Nix](https://nixos.
 - Run `softwareupdate -ia` for softare updates
 - Do a system cleanup `softwareupdate -ia`
 
-## Hardening
+## Hardening[^3]
 
 ### macOS
 
@@ -52,3 +52,8 @@ nano $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist</pre>
 - Connect to network
 - Clear DNS cache: `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
 - Reactivate NextDNS: `nextdns activate`
+
+## References
+[^1]: [Ways to avoid harmful software](https://help.apple.com/machelp/mac/10.12/index.html#/mh11389)
+[^2]: [Yubikey-Guide](https://github.com/drduh/YubiKey-Guide)
+[^3]: [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
