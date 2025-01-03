@@ -25,21 +25,22 @@ This is my personal dotfiles repository. It is managed with [Nix](https://nixos.
 Regarding to [Apple's Best Practices](https://support.apple.com/en-us/102099) hide admin & home dir
 `sudo dscl . create /Users/hiddenuser IsHidden 1`
 `sudo chflags hidden /Users/hiddenuser`
-`sudo dscl 
-delete Local/Defaults/SharePoints/Hidden\ User’s\ Public\ Folder/
-exit`
+<pre>sudo dscl<br>
+delete Local/Defaults/SharePoints/Hidden\ User’s\ Public\ Folder/<br>
+exit</pre>
 
 ### GPG
 `gpg --import /Users/knaggit/Git/dotfiles/gpg/0x7426E2F78A84EB06_knaggit.asc`
 
 `export KEYID=0x7426E2F78A84EB06`
 
-`launchctl load $HOME/Library/LaunchAgents/gnupg.gpg-agent-symlink.plist`
-`nano $HOME/Library/LaunchAgents/gnupg.gpg-agent-symlink.plist`
-`launchctl load $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist`
-`nano $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist`
+<pre>launchctl load $HOME/Library/LaunchAgents/gnupg.gpg-agent-symlink.plist<br>
+nano $HOME/Library/LaunchAgents/gnupg.gpg-agent-symlink.plist<br>
+launchctl load $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist<br>
+nano $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist</pre>
 
 `gpg-connect-agent /bye`
+
 `git config --global user.signingkey $KEYID`
 
 ### SSH
