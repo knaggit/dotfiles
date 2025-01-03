@@ -101,6 +101,7 @@ in
     ".config/starship.toml" = dotfile "starship/starship.toml";
     ".lbdbrc" = dotfile "lbdb/lbdbrc";
     ".config/vdirsyncer/config" = dotfile "vdirsyncer/config";
+    ".config/ghostty/config" = dotfile "ghostty/config";
 
     # Yazi
     ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";

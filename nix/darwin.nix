@@ -309,7 +309,6 @@ in
       "discord" # Voice and text chat software
       "disk-drill" # Data recovery software
       "finicky" # Utility for customizing which browser to start
-      # "geotag"
       "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
       "imageoptim" # Tool to optimise images to a smaller size
       "istat-menus@6" # iStat Menus vor top bar metrics of all ways
