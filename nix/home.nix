@@ -203,7 +203,7 @@ in
     enable = true;
     publicKeys = [
       {
-        source = ../gpg/niklasravnsborg.asc;
+        source = ../gpg/0x7426E2F78A84EB06_knaggit.asc;
         trust = 5;
       }
     ];
