@@ -166,6 +166,7 @@ in
       "mongodb-community@8.0"
       "cloudflared"
       "zbar"
+      "neovim" # Ambitious Vim-fork focused on extensibility and agility
     ];
 
     casks = [
@@ -190,17 +191,21 @@ in
 
       # Applications
       "arc" # Chromium based browser
+      "audio-hijack" # Records audio from any application
       "balenaetcher" # Flashing tool for linux distros on USB
       "bitwarden" # Desktop password and login vault
       "blackhole-2ch" # Virtual Audio Driver
+      "cursor" # Write, edit, and chat about your code with AI
       "cyberduck" # Server and cloud storage browser
       "daisydisk" # Disk space utility
       "discord" # Voice and text chat software
       "finicky" # Utility for customizing which browser to start
+      # "geotag"
       "imageoptim" # Tool to optimise images to a smaller size
       "istat-menus@6" # iStat Menus vor top bar metrics of all ways
       "kitty" # GPU-based terminal emulator
       "logi-options+" # Logitech mouse configuration
+      "loopback" # Cable-free audio router
       "mos" # Smooths scrolling and set mouse scroll directions independently
       "musescore" # Open-source music notation software
       "nota" # Markdown files editor
