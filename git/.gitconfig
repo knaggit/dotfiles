@@ -25,6 +25,12 @@
 	enabled = true
 [delta]
 	syntax-theme = Coldark-Dark
+	minus-style = syntax "#560808"
+	minus-emph-style = syntax "#AF0101"
+	plus-style = syntax "#074C07"
+	plus-emph-style = syntax "#008700"
+	hyperlinks = true
+	pager = less --mouse
 [interactive]
 	diffFilter = delta --color-only
 [filter "lfs"]
