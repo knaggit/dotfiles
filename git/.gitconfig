@@ -23,6 +23,8 @@
 	cmd = code --wait $MERGED
 [rerere]
 	enabled = true
+[diff]
+	colorMoved = default
 [delta]
 	syntax-theme = Coldark-Dark
 	minus-style = syntax "#560808"
