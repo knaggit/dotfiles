@@ -167,6 +167,8 @@ in
       "cloudflared"
       "zbar"
       "neovim" # Ambitious Vim-fork focused on extensibility and agility
+      "subfinder"
+      "gobuster"
     ];
 
     casks = [
