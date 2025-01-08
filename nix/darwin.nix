@@ -159,16 +159,17 @@ in
 
     brews = [
       # Although we already have it in home-manager, this gpg binary is the only one that Fork can find
-      "gnupg"
-      "yubikey-personalization"
-      "ykman"
-      "pinentry-mac"
+      "cloudflared" # Cloudflare Tunnel client (formerly Argo Tunnel)
+      "gnupg" # GNU Pretty Good Privacy (PGP) package
+      "gobuster" # Directory/file & DNS busting tool written in Go
       "mongodb-community@8.0"
-      "cloudflared"
-      "zbar"
+      "neomutt" # E-mail reader with support for Notmuch, NNTP and much more
       "neovim" # Ambitious Vim-fork focused on extensibility and agility
-      "subfinder"
-      "gobuster"
+      "pinentry-mac" # Pinentry for GPG on Mac
+      "subfinder" # Subdomain discovery tool
+      "yubikey-personalization" # YubiKey personalization library and tool
+      "ykman" # Tool for managing your YubiKey configuration
+      "zbar" # Suite of barcodes-reading tools
     ];
 
     casks = [
