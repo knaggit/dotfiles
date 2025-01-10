@@ -159,17 +159,22 @@ in
 
     brews = [
       # Although we already have it in home-manager, this gpg binary is the only one that Fork can find
+      "bitwarden-cli" # Secure and free password manager for all of your devices
       "cloudflared" # Cloudflare Tunnel client (formerly Argo Tunnel)
       "gnupg" # GNU Pretty Good Privacy (PGP) package
       "gobuster" # Directory/file & DNS busting tool written in Go
       "mongodb-community@8.0"
-      "neomutt" # E-mail reader with support for Notmuch, NNTP and much more
       "neovim" # Ambitious Vim-fork focused on extensibility and agility
       "pinentry-mac" # Pinentry for GPG on Mac
       "subfinder" # Subdomain discovery tool
       "yubikey-personalization" # YubiKey personalization library and tool
       "ykman" # Tool for managing your YubiKey configuration
       "zbar" # Suite of barcodes-reading tools
+
+      # Mail
+      "aerc" # mail
+      "himalaya" # CLI email client written in Rust
+      "meli"
     ];
 
     casks = [
@@ -198,6 +203,7 @@ in
       "balenaetcher" # Flashing tool for linux distros on USB
       "bitwarden" # Desktop password and login vault
       "blackhole-2ch" # Virtual Audio Driver
+      "coconutbattery" # Tool to show live information about the batteries in various devices
       "cursor" # Write, edit, and chat about your code with AI
       "cyberduck" # Server and cloud storage browser
       "daisydisk" # Disk space utility
