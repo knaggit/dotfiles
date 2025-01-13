@@ -19,6 +19,19 @@ in
   # Make sure the nix daemon always runs
   services.nix-daemon.enable = true;
 
+ sops = {
+    defaultSopsFile = "${home}/Git/config/secrets.yaml";
+    age.keyFile = "${home}/.config/sops/age/keys.txt"; # Private Key
+    validateSopsFiles = false; # temporary
+    # Disable automatic key generation
+    age.sshKeyPaths = [ ];
+    gnupg.sshKeyPaths = [ ];
+
+    secrets = {
+      nextdns-config = { };
+    };
+  };
+
   services.nextdns.enable = true;
   launchd.daemons.nextdns = {
     # Uncomment to enable logging
@@ -31,7 +44,7 @@ in
 
           while true; do
             # Start long-running nextdns process in the background
-            ${pkgs.nextdns}/bin/nextdns run --config-file=/Users/knaggit/Git/nongit/nextdns-config &
+            ${pkgs.nextdns}/bin/nextdns run --config-file=${config.sops.secrets.nextdns-config.path} &
             nextdns_pid=$!
 
             # If the tmpfs is not yet mounted, the file watchers won't trigger on change
@@ -43,7 +56,7 @@ in
 
             # Monitor symlink and config file in background
             # fswatch will exit when those paths are modified
-            ${pkgs.fswatch}/bin/fswatch -1 /Users/knaggit/Git/nongit/nextdns-config > /dev/null &
+            ${pkgs.fswatch}/bin/fswatch -1 ${config.sops.secrets.nextdns-config.path} > /dev/null &
 
             # Wait for at least one process to exit
             wait -n
@@ -198,6 +211,7 @@ in
       "font-anonymous-pro"
 
       # Applications
+      "anki" # Memory training application
       "arc" # Chromium based browser
       "audio-hijack" # Records audio from any application
       "balenaetcher" # Flashing tool for linux distros on USB

@@ -30,7 +30,7 @@ in
 
   home.packages = with pkgs; [
     #   act # Run GitHub Actions locally
-    #   age # Secure file encryption
+    age # Secure file encryption
     any-nix-shell # Run nix-shell in any directory
     #   cloc # Count lines of code
     #   cloudflared # Cloudflare tunnel
@@ -54,7 +54,7 @@ in
     #   nushell # Modern alternative shell
     #   pandoc # Document conversion
     #   restic # Backup program
-    #   sops # Editor of encrypted files
+    sops # Editor of encrypted files
     tlrc # client for tldr: collaborative cheatsheets for console commands
     #   tree # Display directories as trees
     #   watch # Execute a program periodically
@@ -75,6 +75,7 @@ in
   ];
 
   home.file = {
+    "Library/LaunchAgents/gnupg.gpg-agent.plist" = dotfile "gpg/gnupg.gpg-agent.plist";
     ".env.sh" = dotfile "shell/.env.sh";
     ".gpg.conf" = dotfile "gpg/gpg.conf";
     ".finicky.js" = dotfile "finicky/.finicky.js";
@@ -99,6 +100,10 @@ in
     ".config/yazi/keymap.toml" = dotfile "yazi/keymap.toml";
     ".config/yazi/init.lua" = dotfile "yazi/init.lua";
   };
+
+  # This sets the `XDG_CONFIG_HOME` environment variable to `~/.config`.
+  # For some programs (e.g. `sops`) on macOS this is needed, because they would otherwise look for their config files in `~/Library/Application Support`.
+  xdg.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

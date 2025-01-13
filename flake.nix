@@ -12,6 +12,10 @@
     darwin-custom-icons = {
       url = "github:ryanccn/nix-darwin-custom-icons";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       # home dir
       url = "github:nix-community/home-manager";
@@ -25,6 +29,7 @@
       darwin,
       darwin-custom-icons,
       home-manager,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -41,6 +46,7 @@
         modules = [
           ./nix/darwin.nix
           darwin-custom-icons.darwinModules.default
+          sops-nix.darwinModules.sops
           home-manager.darwinModules.home-manager
           {
             home-manager = {
