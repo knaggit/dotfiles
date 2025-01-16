@@ -175,19 +175,23 @@ in
       "bitwarden-cli" # Secure and free password manager for all of your devices
       "cloudflared" # Cloudflare Tunnel client (formerly Argo Tunnel)
       "gnupg" # GNU Pretty Good Privacy (PGP) package
-      "gobuster" # Directory/file & DNS busting tool written in Go
       "mongodb-community@8.0"
       "neovim" # Ambitious Vim-fork focused on extensibility and agility
       "pinentry-mac" # Pinentry for GPG on Mac
-      "subfinder" # Subdomain discovery tool
       "yubikey-personalization" # YubiKey personalization library and tool
       "ykman" # Tool for managing your YubiKey configuration
       "zbar" # Suite of barcodes-reading tools
 
-      # Mail
-      "aerc" # mail
+      # Mail with PGP support
+      "aerc" # Email client that runs in your terminal
       "himalaya" # CLI email client written in Rust
-      "meli"
+      "meli" # Terminal e-mail client and e-mail client library
+      "neomutt" # E-mail reader with support for Notmuch, NNTP and much more
+
+      # OpSec
+      "gobuster" # Directory/file & DNS busting tool written in Go
+      "httpx" # Fast and multi-purpose HTTP toolkit
+      "subfinder" # Subdomain discovery tool
     ];
 
     casks = [
