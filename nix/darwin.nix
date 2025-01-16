@@ -240,7 +240,7 @@ in
       "signal" # Instant messaging application focusing on security
       "timemator" # Automatic time-tracking application
       "the-unarchiver" # Unpacks archive files
-      "topnotch" # Utility to hide the notch
+      # "topnotch" # Utility to hide the notch
       "visual-studio-code" # Open-source code editor
       "vlc" # Multimedia player
       "wireshark" # Network protocol analyzer
