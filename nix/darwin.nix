@@ -172,26 +172,30 @@ in
 
     brews = [
       # Although we already have it in home-manager, this gpg binary is the only one that Fork can find
-      "bitwarden-cli" # Secure and free password manager for all of your devices
       "cloudflared" # Cloudflare Tunnel client (formerly Argo Tunnel)
-      "gnupg" # GNU Pretty Good Privacy (PGP) package
+
+      "irssi" # Modular IRC client
       "mongodb-community@8.0"
       "neovim" # Ambitious Vim-fork focused on extensibility and agility
-      "pinentry-mac" # Pinentry for GPG on Mac
-      "yubikey-personalization" # YubiKey personalization library and tool
-      "ykman" # Tool for managing your YubiKey configuration
       "zbar" # Suite of barcodes-reading tools
 
       # Mail with PGP support
-      "aerc" # Email client that runs in your terminal
-      "himalaya" # CLI email client written in Rust
-      "meli" # Terminal e-mail client and e-mail client library
-      "neomutt" # E-mail reader with support for Notmuch, NNTP and much more
+      "neomutt" # pain in the ass config + pgp support
+      "lbdb" # Little brother's database for the mutt mail reader
+        # mutt-wizard on a linux system can help
 
       # OpSec
+      "libfido2" # Provides library functionality for FIDO U2F & FIDO 2.0, including USB (required for OpenSSH)
+      "openssh" # Upgrades older OpenSSH of macOS
+      "bitwarden-cli" # Secure and free password manager for all of your devices
       "gobuster" # Directory/file & DNS busting tool written in Go
       "httpx" # Fast and multi-purpose HTTP toolkit
       "subfinder" # Subdomain discovery tool
+      "pass" # password manager for CLI (configurations)
+      "pinentry-mac" # Pinentry for GPG on Mac
+      "yubikey-personalization" # YubiKey personalization library and tool
+      "ykman" # Tool for managing your YubiKey configuration
+      "gnupg" # GNU Pretty Good Privacy (PGP) package
     ];
 
     casks = [
@@ -214,6 +218,11 @@ in
       "font-hack-nerd-font"
       "font-anonymous-pro"
 
+      # OpSec
+      "yubico-authenticator" # Application for generating TOTP and HOTP codes
+      "yubico-yubikey-manager" # Application for configuring any YubiKey
+      "wireshark" # Network protocol analyzer
+
       # Applications
       "anki" # Memory training application
       "arc" # Chromium based browser
@@ -226,8 +235,10 @@ in
       "cyberduck" # Server and cloud storage browser
       "daisydisk" # Disk space utility
       "discord" # Voice and text chat software
+      "disk-drill" # Data recovery software
       "finicky" # Utility for customizing which browser to start
       # "geotag"
+      "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
       "imageoptim" # Tool to optimise images to a smaller size
       "istat-menus@6" # iStat Menus vor top bar metrics of all ways
       "kitty" # GPU-based terminal emulator
@@ -238,6 +249,7 @@ in
       "nota" # Markdown files editor
       "notion" # App to write, plan, collaborate, and get organised
       "numi" # Calculator and converter application
+      "omnigraffle" # Visual communication software
       "qlmarkdown" # Quick Look generator for Markdown files
       "raindropio" # Bookmark manager
       "rwts-pdfwriter" # Print driver for printing documents directly to a pdf file
@@ -247,7 +259,6 @@ in
       # "topnotch" # Utility to hide the notch
       "visual-studio-code" # Open-source code editor
       "vlc" # Multimedia player
-      "wireshark" # Network protocol analyzer
       "zoom" # Video communication and virtual meeting platform
     ];
   };

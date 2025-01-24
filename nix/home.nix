@@ -93,12 +93,16 @@ in
     ".config/kitty/kitty.conf" = dotfile "kitty/kitty.conf";
     ".config/nix/nix.conf" = dotfile "nix/nix.conf";
     ".config/starship.toml" = dotfile "starship/starship.toml";
+    ".lbdbrc" = dotfile "lbdb/lbdbrc";
 
     # Yazi
     ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";
     ".config/yazi/yazi.toml" = dotfile "yazi/yazi.toml";
     ".config/yazi/keymap.toml" = dotfile "yazi/keymap.toml";
     ".config/yazi/init.lua" = dotfile "yazi/init.lua";
+
+    # irssi
+    ".irssi/config" = dotfile "irssi/config";
   };
 
   # This sets the `XDG_CONFIG_HOME` environment variable to `~/.config`.
