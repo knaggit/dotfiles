@@ -1,13 +1,28 @@
 # knaggit's dotfiles
 ## Intro
 
-This repository is managed with [Nix](https://nixos.org/) and [Nix-darwin](https://github.com/LnL7/nix-darwin). It's based on repositories from [niklasravnsborg](https://github.com/niklasravnsborg) and [drdruh](https://github.com/drduh).
+This repository is managed with [Nix](https://nixos.org/) and [Nix-darwin](https://github.com/LnL7/nix-darwin). All design is mainly considered with macOS. It's based on repositories from [niklasravnsborg](https://github.com/niklasravnsborg) and [drdruh](https://github.com/drduh).
 
-## Precautions
+## Preliminary Considerations
 
-- Admin account is not used for day-to-day work, as recommend by Apple[^1][^3] itself.
+### Design
+There is always a lot of ways how to do stuff and what someone is prefering. All software and configuration is thought in a way of **OpSec, CLI, keyboard-interactive and Versioning** first. It's nerdy, fast, customizable as hell and aesthetic.
+
+### What software is used?
+* [kitty](https://sw.kovidgoyal.net/kitty/) OR [ghostty](https://ghostty.org/) with [tmux](https://github.com/tmux/tmux/wiki) for CLI
+* [neovim](https://neovim.io/) for Editing
+* lazygit for Git
+* [NeoMutt](https://neomutt.org/) with [lbdb](https://www.spinnaker.de/lbdb/) for Mail
+* GPG, Smartcards and age for Encryption
+* GitHub for Versioning 
+
+## Requirements
+
+This repoistory require, that you already have created a PKI pair of keys and stored them most secure somewhere (like a SmartCard). If not, consider following the YubiKey-Guide[^2]
 
 ## Initial Setup
+
+Admin account is not used for day-to-day work, as recommend by Apple[^1][^3] itself.
 
 - Create and login to admin account
 - Create standard account, logout from admin account, login in standard account
@@ -45,7 +60,17 @@ nano $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist</pre>
 
 ### SSH
 
+### Secrets
+
+age, pass (with PGP), sops (age)
+
 ## Daily Usage
+
+### Key Bindings
+
+#### neomutt
+#### lazygit
+#### tmux
 
 ### Connect with public network
 - Deactivate NextDNS: `nextdns deactivate`
@@ -54,6 +79,7 @@ nano $HOME/Library/LaunchAgents/gnupg.gpg-agent.plist</pre>
 - Reactivate NextDNS: `nextdns activate`
 
 ## References
-[^1]: [Ways to avoid harmful software](https://help.apple.com/machelp/mac/10.12/index.html#/mh11389)
-[^2]: [Yubikey-Guide](https://github.com/drduh/YubiKey-Guide)
-[^3]: [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
+- [^1]: [Ways to avoid harmful software](https://help.apple.com/machelp/mac/10.12/index.html#/mh11389)
+- [^2]: [Yubikey-Guide](https://github.com/drduh/YubiKey-Guide)
+- [^3]: [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
+- [^4]: [Using mutt on OS X](https://annvix.com/using_mutt_on_os_x)
