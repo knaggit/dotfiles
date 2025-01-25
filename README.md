@@ -17,7 +17,7 @@ There is always a lot of ways how to do stuff and what someone is prefering. All
 
 # Requirements
 
-This repoistory require, that you already have created a PKI pair of keys and stored them most secure somewhere (like a SmartCard). If not, consider following the YubiKey-Guide[^2]
+This repository requires that you already have created a PKI pair of keys and stored them in the most secure place (like a SmartCard). If not, consider following the YubiKey Guide.[^2]
 
 # Initial Setup
 
@@ -83,8 +83,8 @@ age, pass (with PGP), sops (age)
 - Reactivate NextDNS: `nextdns activate`
 
 # References
-- [^1]: [Ways to avoid harmful software](https://help.apple.com/machelp/mac/10.12/index.html#/mh11389)
-- [^2]: [Yubikey-Guide](https://github.com/drduh/YubiKey-Guide)
-- [^3]: [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
-- [^4]: [Using mutt on OS X](https://annvix.com/using_mutt_on_os_x)
-- [^5]: [Neomutt GNUpg and Pass Howto](https://hispagatos.org/post/neomutt-gpg-howto/)
+[^1]: [Ways to avoid harmful software](https://help.apple.com/machelp/mac/10.12/index.html#/mh11389)
+[^2]: [Yubikey-Guide](https://github.com/drduh/YubiKey-Guide)
+[^3]: [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
+[^4]: [Using mutt on OS X](https://annvix.com/using_mutt_on_os_x)
+[^5]: [Neomutt GNUpg and Pass Howto](https://hispagatos.org/post/neomutt-gpg-howto/)
