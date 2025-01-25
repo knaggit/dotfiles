@@ -36,6 +36,7 @@ in
     #   cloudflared # Cloudflare tunnel
     delta # Syntax-highlighter for git and diff output
     exiftool # EXIF tool for file with EXIF data (photos)
+    fastcli #vTest your download and upload speed using fast.com
     #   fd # Alternative to find
     ffmpeg_7 # Play, record, convert, and stream audio and video
     gh # GitHub command-line tool
@@ -47,6 +48,7 @@ in
     #   htop # Improved top (interactive process viewer)
     #   httpie # User-friendly HTTP client
     #   imagemagick # Manipulate images in many formats
+    instaloader # Download pictures (or videos) along with their captions and other metadata from Instagram
     #   micromamba # Environment manager
     mtr
     #   ngrok # Reverse proxy, secure tunnels to localhost

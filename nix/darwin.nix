@@ -116,19 +116,28 @@ in
 
   system.defaults.NSGlobalDomain = {
     # Enable key repeat when pressing and holding a key and set a fast repeat rate
-    ApplePressAndHoldEnabled = false;
+    ApplePressAndHoldEnabled = true;
     InitialKeyRepeat = 16;
     KeyRepeat = 2;
 
     AppleShowAllExtensions = true; # Show all filename extensions in Finder
+    AppleShowAllFiles = true; # Whether to always show hidden files. The default is false.
 
-    AppleSpacesSwitchOnActivate = false; # Disable switching to a space when an application is activated
+    AppleSpacesSwitchOnActivate = true; # Enable switching to a space when an application is activated
 
     "com.apple.swipescrolldirection" = false;
   };
 
   system.defaults.dock = {
     autohide = true; # automatically hide and show the Dock
+    mineffect = scale; # Set the minimize/maximize window effect. The default is genie.
+    mru-spaces = false; # Whether to automatically rearrange spaces based on most recent use. The default is true.
+    orientation = left; # Position of the dock on screen. The default is “bottom”.
+    show-recents = false; # Show recent applications in the dock.
+    wvous-br-corner = 1; # Hot corner action for bottom right corner.
+  #  persistent-apps = [
+  #      "/Applications/Arc.app"
+  #  ]
   };
 
   system.keyboard = {
