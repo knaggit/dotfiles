@@ -20,7 +20,7 @@ in
   services.nix-daemon.enable = true;
 
  sops = {
-    defaultSopsFile = "${home}/Git/config/secrets.yaml";
+    defaultSopsFile = "${home}/Git/config/secrets.yaml"; # Secrets Store
     age.keyFile = "${home}/.config/sops/age/keys.txt"; # Private Key
     validateSopsFiles = false; # temporary
     # Disable automatic key generation
@@ -29,6 +29,7 @@ in
 
     secrets = {
       nextdns-config = { };
+      # irssi = { };
     };
   };
 
@@ -114,18 +115,76 @@ in
     TrackpadThreeFingerDrag = true; # Enable three finger drag
   };
 
-  system.defaults.NSGlobalDomain = {
-    # Enable key repeat when pressing and holding a key and set a fast repeat rate
-    ApplePressAndHoldEnabled = true;
-    InitialKeyRepeat = 16;
-    KeyRepeat = 2;
+  
 
-    AppleShowAllExtensions = true; # Show all filename extensions in Finder
-    AppleShowAllFiles = true; # Whether to always show hidden files. The default is false.
+  system.defaults.CustomUserPreferences = {
+      NSGlobalDomain = {
+        WebKitDeveloperExtras = true; # Add a context menu item for showing the Web Inspector in web views
+        ApplePressAndHoldEnabled = true; # Enable key repeat when pressing and holding a key and set a fast repeat rate
+        InitialKeyRepeat = 16;
+        KeyRepeat = 2;
 
-    AppleSpacesSwitchOnActivate = true; # Enable switching to a space when an application is activated
+        AppleShowAllExtensions = true; # Show all filename extensions in Finder
+        AppleShowAllFiles = true; # Whether to always show hidden files. The default is false.
 
-    "com.apple.swipescrolldirection" = false;
+        AppleSpacesSwitchOnActivate = true; # Enable switching to a space when an application is activated
+      };
+      "com.apple.finder" = {
+        ShowExternalHardDrivesOnDesktop = true;
+        ShowHardDrivesOnDesktop = true;
+        ShowMountedServersOnDesktop = true;
+        ShowRemovableMediaOnDesktop = true;
+        _FXSortFoldersFirst = true;
+        # When performing a search, search the current folder by default
+        FXDefaultSearchScope = "SCcf";
+
+      "com.apple.swipescrolldirection" = false;
+
+      "com.apple.finder" = {
+          ShowExternalHardDrivesOnDesktop = true;
+          ShowHardDrivesOnDesktop = true;
+          ShowMountedServersOnDesktop = true;
+          ShowRemovableMediaOnDesktop = true;
+          _FXSortFoldersFirst = true;
+          # When performing a search, search the current folder by default
+          FXDefaultSearchScope = "SCcf";
+        };
+      "com.apple.desktopservices" = {
+          # Avoid creating .DS_Store files on network or USB volumes
+          DSDontWriteNetworkStores = true;
+          DSDontWriteUSBStores = true;
+        };
+      "com.apple.screensaver" = {
+          # Require password immediately after sleep or screen saver begins
+          askForPassword = 1;
+          askForPasswordDelay = 0;
+        };
+      "com.apple.screencapture" = {
+          location = "~/Desktop";
+          type = "png";
+        };
+      "com.apple.AdLib" = {
+          allowApplePersonalizedAdvertising = false;
+        };
+      "com.apple.print.PrintingPrefs" = {
+          # Automatically quit printer app once the print jobs complete
+          "Quit When Finished" = true;
+        };
+      "com.apple.SoftwareUpdate" = {
+          AutomaticCheckEnabled = true;
+          # Check for software updates daily, not just once per week
+          ScheduleFrequency = 1;
+          # Download newly available updates in background
+          AutomaticDownload = 1;
+          # Install System data files & security updates
+          CriticalUpdateInstall = 1;
+        };
+      "com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
+        # Prevent Photos from opening automatically when devices are plugged in
+      "com.apple.ImageCapture".disableHotPlug = true;
+        # Turn on app auto-update
+      "com.apple.commerce".AutoUpdate = true;
+     };
   };
 
   system.defaults.dock = {
