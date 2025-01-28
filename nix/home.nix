@@ -49,6 +49,7 @@ in
     #   httpie # User-friendly HTTP client
     #   imagemagick # Manipulate images in many formats
     instaloader # Download pictures (or videos) along with their captions and other metadata from Instagram
+    kahl # CLI calendar application
     #   micromamba # Environment manager
     mtr
     #   ngrok # Reverse proxy, secure tunnels to localhost
@@ -60,6 +61,7 @@ in
     tlrc # client for tldr: collaborative cheatsheets for console commands
     #   tree # Display directories as trees
     #   watch # Execute a program periodically
+    vdirsyncer # Synchronize calendars and contacts
     wget # tool for downloading files from the web
     yt-dlp # youtube-dl successor
     #   yq # Process YAML, JSON, XML, CSV and properties documents
@@ -92,10 +94,12 @@ in
     ".config/gitui/theme.ron" = dotfile "gitui/theme.ron";
     ".config/helix/config.toml" = dotfile "helix/config.toml";
     ".config/helix/themes/my_theme.toml" = dotfile "helix/my_theme.toml";
+    ".config/khal/config" = dotfile "khal/config";
     ".config/kitty/kitty.conf" = dotfile "kitty/kitty.conf";
     ".config/nix/nix.conf" = dotfile "nix/nix.conf";
     ".config/starship.toml" = dotfile "starship/starship.toml";
     ".lbdbrc" = dotfile "lbdb/lbdbrc";
+    ".config/vdirsyncer/config" = dotfile "vdirsyncer/config";
 
     # Yazi
     ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";

@@ -11,9 +11,10 @@ There is always a lot of ways how to do stuff and what someone is prefering. All
 * [kitty](https://sw.kovidgoyal.net/kitty/) OR [ghostty](https://ghostty.org/) with [tmux](https://github.com/tmux/tmux/wiki) for CLI
 * [neovim](https://neovim.io/) as IDE (with nerdtree, coc, copilot and themes)
 * [lazygit](https://github.com/jesseduffield/lazygit) for Git
-* [NeoMutt](https://neomutt.org/) with [lbdb](https://www.spinnaker.de/lbdb/) for Mail
-* GPG, Smartcards and age for Encryption
-* GitHub for Versioning 
+* PGP, Smartcards and age/pass/sops for Encryption
+* Git for Versioning 
+* [NeoMutt](https://neomutt.org/) with [lbdb](https://www.spinnaker.de/lbdb/) and PGP for Mail
+* [khal](https://khal.readthedocs.io/en/latest/configure.html#help-with-initial-configuration) with [vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) for Calendar
 
 # Requirements
 
