@@ -286,6 +286,9 @@ in
       "font-hack-nerd-font"
       "font-anonymous-pro"
 
+      # Work
+      "figma" # Collaborative team software
+      
       # OpSec
       "yubico-authenticator" # Application for generating TOTP and HOTP codes
       "yubico-yubikey-manager" # Application for configuring any YubiKey
