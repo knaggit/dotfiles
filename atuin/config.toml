@@ -1,6 +1,9 @@
 # Enable automatic sync
 auto_sync = true
 
+# Don't check for updates
+update_check = false
+
 # When pressing the up-key, search for history commands in the current directory
 filter_mode_shell_up_key_binding = "directory"
 
@@ -9,17 +12,14 @@ filter_mode_shell_up_key_binding = "directory"
 # amount of commands in your history.
 show_help = true
 
+# Put the search input on the top
 invert = true
 
-keymap_mode = "vim-normal"
+keymap_mode = "vim-insert"
+style = "full"
 
-filter_mode = "directory"
-
-# inline_height = 40
-style = "compact"
-
-# use numbers with ctrl
-# ctrl_n_shortcuts = true
+# Use numbers with ctrl
+ctrl_n_shortcuts = true
 
 # Don't immediately execute the command
 enter_accept = false
