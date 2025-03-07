@@ -36,7 +36,7 @@ in
     #   cloudflared # Cloudflare tunnel
     delta # Syntax-highlighter for git and diff output
     exiftool # EXIF tool for file with EXIF data (photos)
-    fast-cli # Test your download and upload speed using fast.com
+    # fast-cli # Test your download and upload speed using fast.com
     #   fd # Alternative to find
     ffmpeg_7 # Play, record, convert, and stream audio and video
     gh # GitHub command-line tool
