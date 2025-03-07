@@ -19,7 +19,7 @@ in
   # Make sure the nix daemon always runs
   services.nix-daemon.enable = true;
 
- sops = {
+  sops = {
     defaultSopsFile = "${home}/Git/config/secrets.yaml"; # Secrets Store
     age.keyFile = "${home}/.config/sops/age/keys.txt"; # Private Key
     validateSopsFiles = false; # temporary
@@ -115,20 +115,29 @@ in
     TrackpadThreeFingerDrag = true; # Enable three finger drag
   };
 
-  
-
   system.defaults.CustomUserPreferences = {
-      NSGlobalDomain = {
-        WebKitDeveloperExtras = true; # Add a context menu item for showing the Web Inspector in web views
-        ApplePressAndHoldEnabled = true; # Enable key repeat when pressing and holding a key and set a fast repeat rate
-        InitialKeyRepeat = 16;
-        KeyRepeat = 2;
+    NSGlobalDomain = {
+      WebKitDeveloperExtras = true; # Add a context menu item for showing the Web Inspector in web views
+      ApplePressAndHoldEnabled = true; # Enable key repeat when pressing and holding a key and set a fast repeat rate
+      InitialKeyRepeat = 16;
+      KeyRepeat = 2;
 
-        AppleShowAllExtensions = true; # Show all filename extensions in Finder
-        AppleShowAllFiles = true; # Whether to always show hidden files. The default is false.
+      AppleShowAllExtensions = true; # Show all filename extensions in Finder
+      AppleShowAllFiles = true; # Whether to always show hidden files. The default is false.
 
-        AppleSpacesSwitchOnActivate = true; # Enable switching to a space when an application is activated
-      };
+      AppleSpacesSwitchOnActivate = true; # Enable switching to a space when an application is activated
+    };
+    "com.apple.finder" = {
+      ShowExternalHardDrivesOnDesktop = true;
+      ShowHardDrivesOnDesktop = true;
+      ShowMountedServersOnDesktop = true;
+      ShowRemovableMediaOnDesktop = true;
+      _FXSortFoldersFirst = true;
+      # When performing a search, search the current folder by default
+      FXDefaultSearchScope = "SCcf";
+
+      "com.apple.swipescrolldirection" = false;
+
       "com.apple.finder" = {
         ShowExternalHardDrivesOnDesktop = true;
         ShowHardDrivesOnDesktop = true;
@@ -137,54 +146,43 @@ in
         _FXSortFoldersFirst = true;
         # When performing a search, search the current folder by default
         FXDefaultSearchScope = "SCcf";
-
-      "com.apple.swipescrolldirection" = false;
-
-      "com.apple.finder" = {
-          ShowExternalHardDrivesOnDesktop = true;
-          ShowHardDrivesOnDesktop = true;
-          ShowMountedServersOnDesktop = true;
-          ShowRemovableMediaOnDesktop = true;
-          _FXSortFoldersFirst = true;
-          # When performing a search, search the current folder by default
-          FXDefaultSearchScope = "SCcf";
-        };
+      };
       "com.apple.desktopservices" = {
-          # Avoid creating .DS_Store files on network or USB volumes
-          DSDontWriteNetworkStores = true;
-          DSDontWriteUSBStores = true;
-        };
+        # Avoid creating .DS_Store files on network or USB volumes
+        DSDontWriteNetworkStores = true;
+        DSDontWriteUSBStores = true;
+      };
       "com.apple.screensaver" = {
-          # Require password immediately after sleep or screen saver begins
-          askForPassword = 1;
-          askForPasswordDelay = 0;
-        };
+        # Require password immediately after sleep or screen saver begins
+        askForPassword = 1;
+        askForPasswordDelay = 0;
+      };
       "com.apple.screencapture" = {
-          location = "~/Desktop";
-          type = "png";
-        };
+        location = "~/Desktop";
+        type = "png";
+      };
       "com.apple.AdLib" = {
-          allowApplePersonalizedAdvertising = false;
-        };
+        allowApplePersonalizedAdvertising = false;
+      };
       "com.apple.print.PrintingPrefs" = {
-          # Automatically quit printer app once the print jobs complete
-          "Quit When Finished" = true;
-        };
+        # Automatically quit printer app once the print jobs complete
+        "Quit When Finished" = true;
+      };
       "com.apple.SoftwareUpdate" = {
-          AutomaticCheckEnabled = true;
-          # Check for software updates daily, not just once per week
-          ScheduleFrequency = 1;
-          # Download newly available updates in background
-          AutomaticDownload = 1;
-          # Install System data files & security updates
-          CriticalUpdateInstall = 1;
-        };
+        AutomaticCheckEnabled = true;
+        # Check for software updates daily, not just once per week
+        ScheduleFrequency = 1;
+        # Download newly available updates in background
+        AutomaticDownload = 1;
+        # Install System data files & security updates
+        CriticalUpdateInstall = 1;
+      };
       "com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
-        # Prevent Photos from opening automatically when devices are plugged in
+      # Prevent Photos from opening automatically when devices are plugged in
       "com.apple.ImageCapture".disableHotPlug = true;
-        # Turn on app auto-update
+      # Turn on app auto-update
       "com.apple.commerce".AutoUpdate = true;
-     };
+    };
   };
 
   system.defaults.dock = {
@@ -194,9 +192,9 @@ in
     orientation = "left"; # Position of the dock on screen. The default is “bottom”.
     show-recents = false; # Show recent applications in the dock.
     wvous-br-corner = 1; # Hot corner action for bottom right corner.
-  #  persistent-apps = [
-  #      "/Applications/Arc.app"
-  #  ]
+    #  persistent-apps = [
+    #      "/Applications/Arc.app"
+    #  ]
   };
 
   system.keyboard = {
@@ -252,7 +250,7 @@ in
       "lbdb" # Little brother's database for the mutt mail reader
       # mutt-wizard on a linux system can help
 
-# Überlegen zu home.nix zu verschieben
+      # Überlegen zu home.nix zu verschieben
       # OpSec
       "libfido2" # Provides library functionality for FIDO U2F & FIDO 2.0, including USB (required for OpenSSH)
       "openssh" # Upgrades older OpenSSH of macOS
@@ -289,7 +287,7 @@ in
 
       # Work
       "figma" # Collaborative team software
-      
+
       # OpSec
       "yubico-authenticator" # Application for generating TOTP and HOTP codes
       "yubico-yubikey-manager" # Application for configuring any YubiKey
