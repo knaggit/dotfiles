@@ -189,9 +189,9 @@ in
 
   system.defaults.dock = {
     autohide = true; # automatically hide and show the Dock
-    mineffect = scale; # Set the minimize/maximize window effect. The default is genie.
+    mineffect = "scale"; # Set the minimize/maximize window effect. The default is genie.
     mru-spaces = false; # Whether to automatically rearrange spaces based on most recent use. The default is true.
-    orientation = left; # Position of the dock on screen. The default is “bottom”.
+    orientation = "left"; # Position of the dock on screen. The default is “bottom”.
     show-recents = false; # Show recent applications in the dock.
     wvous-br-corner = 1; # Hot corner action for bottom right corner.
   #  persistent-apps = [
