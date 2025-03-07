@@ -49,7 +49,7 @@ in
     #   httpie # User-friendly HTTP client
     #   imagemagick # Manipulate images in many formats
     instaloader # Download pictures (or videos) along with their captions and other metadata from Instagram
-    kahl # CLI calendar application
+    khal # CLI calendar application
     #   micromamba # Environment manager
     mtr
     #   ngrok # Reverse proxy, secure tunnels to localhost
