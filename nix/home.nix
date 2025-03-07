@@ -68,7 +68,7 @@ in
     #   yq # Process YAML, JSON, XML, CSV and properties documents
 
     # Work
-    teams # Microsoft Teams
+    # teams # Microsoft Teams
 
 
     #   # Fun
