@@ -67,10 +67,6 @@ in
     yt-dlp # youtube-dl successor
     #   yq # Process YAML, JSON, XML, CSV and properties documents
 
-    # Work
-    # teams # Microsoft Teams
-
-
     #   # Fun
     #   asciiquarium # Aquarium animation
     #   cmatrix # Matrix animation

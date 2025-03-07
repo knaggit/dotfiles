@@ -250,8 +250,9 @@ in
       # Mail with PGP support
       "neomutt" # pain in the ass config + pgp support
       "lbdb" # Little brother's database for the mutt mail reader
-        # mutt-wizard on a linux system can help
+      # mutt-wizard on a linux system can help
 
+# Überlegen zu home.nix zu verschieben
       # OpSec
       "libfido2" # Provides library functionality for FIDO U2F & FIDO 2.0, including USB (required for OpenSSH)
       "openssh" # Upgrades older OpenSSH of macOS
