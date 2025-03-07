@@ -56,6 +56,7 @@ in
     #   nodePackages.svgo # Optimize SVGs
     #   nushell # Modern alternative shell
     #   pandoc # Document conversion
+    qrrs # CLI QR code generator and reader written in rust
     #   restic # Backup program
     sops # Editor of encrypted files
     tlrc # client for tldr: collaborative cheatsheets for console commands
@@ -68,7 +69,7 @@ in
 
     # Work
     teams # Microsoft Teams
-    
+
 
     #   # Fun
     #   asciiquarium # Aquarium animation
