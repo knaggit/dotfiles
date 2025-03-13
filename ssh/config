@@ -1,4 +1,41 @@
-Host mesh
-  HostName 192.168.1.1
-  User root
-  IdentityFile ~/.ssh/id_rsa
+# https://github.com/drduh/config/blob/master/ssh_config
+# https://linux.die.net/man/5/ssh_config
+#Host router
+#  IdentityFile ~/.ssh/router
+#  HostName 192.168.1.1
+#  Port 2222
+#  User sysadm
+#  ControlMaster auto
+#  ControlPath ~/.ssh/master-%r@%h:%p
+#  ControlPersist 300
+Host github.com
+  User git
+  ControlMaster no
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+Host rpi
+  HostName 10.10.12.50
+  User rpi
+  IdentityFile ~/.ssh/yk5nfc-blue-work
+Host *
+  #ControlMaster auto
+  #ControlPath ~/.ssh/master-%r@%h:%p
+  #ControlPersist 300
+  #AddKeysToAgent yes
+  AddressFamily inet
+  HashKnownHosts yes
+  VisualHostKey yes
+  PasswordAuthentication no
+  ChallengeResponseAuthentication no
+  StrictHostKeyChecking ask
+  VerifyHostKeyDNS yes
+  ForwardAgent no
+  ForwardX11 no
+  ForwardX11Trusted no
+  ServerAliveInterval 300
+  ServerAliveCountMax 2
+  Ciphers aes256-gcm@openssh.com
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
