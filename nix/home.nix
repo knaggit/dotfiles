@@ -61,6 +61,7 @@ in
     sops # Editor of encrypted files
     tlrc # client for tldr: collaborative cheatsheets for console commands
     #   tree # Display directories as trees
+    trippy
     #   watch # Execute a program periodically
     vdirsyncer # Synchronize calendars and contacts
     wget # tool for downloading files from the web

@@ -306,6 +306,7 @@ in
       "daisydisk" # Disk space utility
       "discord" # Voice and text chat software
       "disk-drill" # Data recovery software
+      "figma" # Collaborative team software
       "finicky" # Utility for customizing which browser to start
       "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
       "imageoptim" # Tool to optimise images to a smaller size
@@ -313,6 +314,7 @@ in
       "kitty" # GPU-based terminal emulator
       "logi-options+" # Logitech mouse configuration
       "loopback" # Cable-free audio router
+      "miro" # Online collaborative whiteboard platform
       "mos" # Smooths scrolling and set mouse scroll directions independently
       "musescore" # Open-source music notation software
       "nota" # Markdown files editor
