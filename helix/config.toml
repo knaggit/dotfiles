@@ -7,7 +7,7 @@ cursorline = true
 
 # Use correct colors over SSH
 # The same can be achieved with `export COLORTERM truecolor`
-true-color = true 
+true-color = true
 
 [editor.whitespace.render]
 space = "all"
@@ -41,11 +41,16 @@ right = [
   "primary-selection-length",
   "position",
   "position-percentage",
-  "spacer"
+  "spacer",
 ]
 
 [keys.normal]
 A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
-A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+A-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before",
+]
 "C-d" = ["half_page_down", "goto_window_center"]
 "C-u" = ["half_page_up", "goto_window_center"]

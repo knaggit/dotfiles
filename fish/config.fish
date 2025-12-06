@@ -11,7 +11,7 @@ end
 _spaced_prompts
 
 # Init Atuin
-atuin init fish --disable-ctrl-r --disable-up-arrow | source
+ATUIN_NOBIND=true atuin init fish | source
 bind \ca _atuin_search
 
 # Config any-nix-shell

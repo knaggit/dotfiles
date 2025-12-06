@@ -7,17 +7,24 @@
 
 let
   shellAliases = {
-    lg = "lazygit";
+    # Set the `TERM` env var to fix color display with `delta` as long as lazygit doesn't support Ghostty.
+    # Relevant Pull Request: https://github.com/jesseduffield/lazygit/pull/4149
+    lg = "TERM=xterm-256color lazygit";
     man = "batman";
     nix-switch =
       if pkgs.stdenv.isDarwin then
-        "nix run nix-darwin -- switch --flake ~/Git/dotfiles"
+        "sudo darwin-rebuild switch --flake ~/Git/dotfiles"
       else
         "sudo nixos-rebuild switch --flake ~/Git/dotfiles";
     svgo = "svgo --config=$HOME/.svgo.config.js";
     wifi = "nextdns deactivate; open http://neverssl.com; read -P 'Continue? '; nextdns activate";
     ffmpeg = "ffmpeg -hide_banner";
     cat = "bat -p";
+
+    # Shortcuts
+    c = "clear";
+    o = "open .";
+    dot = "hx ~/dotfiles";
   };
   homePath = config.home.homeDirectory;
   configDir = "${homePath}/Git/dotfiles";
@@ -37,18 +44,21 @@ in
     #   act # Run GitHub Actions locally
     age # Secure file encryption
     any-nix-shell # Run nix-shell in any directory
-    #   cloc # Count lines of code
-    #   cloudflared # Cloudflare tunnel
+    atuin # Universal history
+    btop # Monitor of resources
+    bun # Incredibly fast JavaScript runtime
+    cloc # Count lines of code
+    cloudflared # Cloudflare tunnel
     delta # Syntax-highlighter for git and diff output
     exiftool # EXIF tool for file with EXIF data (photos)
     # fast-cli # Test your download and upload speed using fast.com
     #   fd # Alternative to find
     ffmpeg_7 # Play, record, convert, and stream audio and video
     gh # GitHub command-line tool
-    #   gitui # Terminal ui for git
+    git # Version control system
+    gitui # Terminal ui for git
     gnused # GNU version of the famous stream editor
     gnutar # GNU version of the tar archiving utility
-    #   google-cloud-sdk # Manage resources and applications hosted on Google Cloud
     helix # Post-modern modal text editor
     #   htop # Improved top (interactive process viewer)
     #   httpie # User-friendly HTTP client
@@ -70,12 +80,17 @@ in
     yt-dlp # youtube-dl successor
     #   yq # Process YAML, JSON, XML, CSV and properties documents
 
-    #   # Fun
-    #   asciiquarium # Aquarium animation
-    #   cmatrix # Matrix animation
-    #   cowsay # Talking cow
-    #   lolcat # Rainbow colors
-    #   sl # Steam locomotive
+    # AI Tools
+    codex
+    opencode
+
+    # Fun
+    asciiquarium # Aquarium animation
+    cbonsai # Bonsai
+    cmatrix # Matrix animation
+    cowsay # Talking cow
+    lolcat # Rainbow colors
+    sl # Steam locomotive
   ];
 
   imports = [
@@ -83,17 +98,9 @@ in
   ];
 
   home.file = {
-    "Library/LaunchAgents/gnupg.gpg-agent.plist" = dotfile "gpg/gnupg.gpg-agent.plist";
-    ".env.sh" = dotfile "shell/.env.sh";
-    ".gpg.conf" = dotfile "gpg/gpg.conf";
-    ".finicky.js" = dotfile "finicky/.finicky.js";
-    ".gitconfig" = dotfile "git/.gitconfig";
-    ".gitignore" = dotfile "git/.gitignore";
-    ".ssh/config" = dotfile "ssh/config";
-    ".svgo.config.js" = dotfile "svgo/.svgo.config.js";
-    ".vimrc" = dotfile "vim/.vimrc";
-
     ".config/atuin/config.toml" = dotfile "atuin/config.toml";
+    ".config/btop/btop.conf" = dotfile "btop/btop.conf";
+    ".config/ghostty/config" = dotfile "ghostty/config";
     ".config/gitui/key_bindings.ron" = dotfile "gitui/key_bindings.ron";
     ".config/gitui/theme.ron" = dotfile "gitui/theme.ron";
     ".config/helix/config.toml" = dotfile "helix/config.toml";
@@ -101,19 +108,43 @@ in
     ".config/khal/config" = dotfile "khal/config";
     ".config/kitty/kitty.conf" = dotfile "kitty/kitty.conf";
     ".config/nix/nix.conf" = dotfile "nix/nix.conf";
+    ".config/opencode/opencode.jsonc" = dotfile "opencode/opencode.jsonc";
+    ".config/opencode/plugin/my-plugin.ts" = dotfile "opencode/plugin/my-plugin.ts";
+    ".config/posting/config.yaml" = dotfile "posting/config.yaml";
     ".config/starship.toml" = dotfile "starship/starship.toml";
-    ".lbdbrc" = dotfile "lbdb/lbdbrc";
     ".config/vdirsyncer/config" = dotfile "vdirsyncer/config";
-    ".config/ghostty/config" = dotfile "ghostty/config";
-
-    # Yazi
+    ".config/yazi/init.lua" = dotfile "yazi/init.lua";
+    ".config/yazi/keymap.toml" = dotfile "yazi/keymap.toml";
     ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";
     ".config/yazi/yazi.toml" = dotfile "yazi/yazi.toml";
-    ".config/yazi/keymap.toml" = dotfile "yazi/keymap.toml";
-    ".config/yazi/init.lua" = dotfile "yazi/init.lua";
-
-    # irssi
+    ".env.sh" = dotfile "shell/.env.sh";
+    ".finicky.js" = dotfile "finicky/.finicky.js";
+    ".gitconfig" = dotfile "git/.gitconfig";
+    ".gpg.conf" = dotfile "gpg/gpg.conf";
     ".irssi/config" = dotfile "irssi/config";
+    ".lbdbrc" = dotfile "lbdb/lbdbrc";
+    ".local/share/posting/themes/my_theme.yaml" = dotfile "posting/themes/my_theme.yaml";
+    ".ssh/config" = dotfile "ssh/config";
+    ".svgo.config.js" = dotfile "svgo/.svgo.config.js";
+    ".vimrc" = dotfile "vim/.vimrc";
+    "/Users/nik/Library/Application Support/ableset/custom-styles/styles.css" =
+    "Library/LaunchAgents/gnupg.gpg-agent.plist" = dotfile "gpg/gnupg.gpg-agent.plist";
+  };
+
+  # This sets the `XDG_CONFIG_HOME` environment variable to `~/.config`.
+  # For some programs (e.g. `sops`) on macOS this is needed, because they would otherwise look for their config files in `~/Library/Application Support`.
+  xdg.enable = true;
+
+  sops = {
+    defaultSopsFile = "${secretsPath}/secrets.yaml";
+    age.keyFile = "${homePath}/.config/sops/age/keys.txt";
+    secrets = {
+      "atuin/username" = { };
+      "atuin/password" = { };
+      "atuin/key" = {
+        path = "${homePath}/.local/share/atuin/key";
+      };
+    };
   };
 
   # This sets the `XDG_CONFIG_HOME` environment variable to `~/.config`.
@@ -125,7 +156,7 @@ in
 
   programs.fish = {
     enable = true;
-    shellInitLast = builtins.readFile ../fish/config.fish;
+    shellInitLast = "source ~/dotfiles/fish/config.fish";
     shellAliases = shellAliases;
     plugins = [
       {
@@ -144,15 +175,6 @@ in
           repo = "sponge";
           rev = "1.1.0";
           sha256 = "sha256-MdcZUDRtNJdiyo2l9o5ma7nAX84xEJbGFhAVhK+Zm1w=";
-        };
-      }
-      {
-        name = "google-cloud-sdk-fish-completion";
-        src = pkgs.fetchFromGitHub {
-          owner = "lgathy";
-          repo = "google-cloud-sdk-fish-completion";
-          rev = "bc24b0bf7da2addca377d89feece4487ca0b1e9c";
-          sha256 = "sha256-BIbzdxAj3mrf340l4hNkXwA13rIIFnC6BxM6YuJ7/w8=";
         };
       }
       {
@@ -191,23 +213,29 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtraFirst = ''
-      # Set PATH and environment
-      source ~/.env.sh
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        # Set PATH and environment
+        source ~/.env.sh
+      '')
 
-    initExtra = ''
-      # Ignore commands in history that begin with a space
-      # https://dev.to/epranka/hide-the-exported-env-variables-from-the-history-49ni
-      export HISTCONTROL=ignorespace
+      (lib.mkAfter ''
+        # Ignore commands in history that begin with a space
+        # https://dev.to/epranka/hide-the-exported-env-variables-from-the-history-49ni
+        export HISTCONTROL=ignorespace
 
-      # Bind Alt+Left and Alt+Right to move between words
-      bindkey "^[[1;3C" forward-word
-      bindkey "^[[1;3D" backward-word
+        # Bind Alt+Left and Alt+Right to move between words
+        bindkey "^[[1;3C" forward-word
+        bindkey "^[[1;3D" backward-word
 
-      # This adds a blank line before each command output for better readability
-      function precmd { echo }
-    '';
+        # Setup Atuin
+        eval "$(ATUIN_NOBIND=true atuin init zsh)"
+        bindkey '^a' atuin-search
+
+        # This adds a blank line before each command output for better readability
+        function precmd { echo }
+      '')
+    ];
 
     shellAliases = shellAliases;
 
@@ -231,7 +259,7 @@ in
 
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry;
+    pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry;
   };
 
   programs.direnv = {
@@ -244,18 +272,21 @@ in
 
   programs.yazi = {
     enable = true;
+    plugins = {
+      inherit (pkgs.yaziPlugins)
+        full-border
+        starship
+        ;
+    };
+    initLua = ''
+      require("full-border"):setup()
+      require("starship"):setup()
+    '';
   };
 
   # Universal prompt
   programs.starship = {
     enable = true;
-  };
-
-  # Universal history
-  programs.atuin = {
-    enable = true;
-    enableFishIntegration = false; # We set it up manually in config.fish
-    flags = [ "--disable-up-arrow" ];
   };
 
   # Modern replacement for 'ls'
@@ -315,6 +346,10 @@ in
           colorArg = "always";
           pager = "delta --paging=never";
         };
+        commit = {
+          autoWrapCommitMessage = false;
+        };
+        autoForwardBranches = "none";
       };
       gui = {
         scrollHeight = 1;

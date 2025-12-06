@@ -1,0 +1,6 @@
+theme: my_theme
+load_user_themes: true
+load_builtin_themes: false
+watch_themes: false
+heading:
+  visible: false

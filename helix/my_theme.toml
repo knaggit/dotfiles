@@ -8,6 +8,6 @@ inherits = "ayu_mirage"
 
 # Override colors in the palette:
 [palette]
-gray = "#6E7C8E" # brightend for higher contrast, was #565b66
+gray = "#6E7C8E"               # brightend for higher contrast, was #565b66
 dark_gray_brighter = "#4F5867" # added for higher contrast
-dark_gray = "#323843" # not changed
+dark_gray = "#323843"          # not changed

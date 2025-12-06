@@ -1,0 +1,9 @@
+name: my_theme # use this name in your config file
+primary: "#ffbe98" # buttons, fixed table columns
+secondary: "#f39c12" # method selector, some minor labels
+accent: "#fad07b" # header text, scrollbars, cursors, focus highlights
+background: "#1f2430" # background colors
+surface: "#17202a" # panels, etc
+error: "#e74c3c" # error messages
+success: "#2ecc71" # success messages
+warning: "#f1c40f" # warning messages

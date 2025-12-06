@@ -13,9 +13,6 @@ The icons in this folder belong to their respective owners and are used here for
 **Spotify**  
 [Crakitus](https://macosicons.com/#/u/Crakitus)
 
-**Notion**  
-[Adam Whitcroft](https://dribbble.com/shots/18144055-Notion-icon)
-
 **Microsoft Word, Excel, OneNote and Teams**  
 [Zoken](https://macosicons.com/#/u/Zoken)
 

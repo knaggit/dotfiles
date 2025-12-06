@@ -3,6 +3,10 @@
   programs.my-tmux = {
     enable = true;
     configuration = ''
+      # Set fish as default shell and default command
+      set -g default-shell ${pkgs.fish}/bin/fish
+      set -g default-command ${pkgs.fish}/bin/fish
+
       # Include my configuration
       source-file ${configDir}/tmux/custom.conf
     '';

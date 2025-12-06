@@ -9,15 +9,15 @@ with lib;
 
 let
   home = "/Users/knaggit";
+  configDir = "${home}/Git/dotfiles";
   appicon = name: {
     path = "/Applications/${name}.app";
-    icon = "${home}/dotfiles/macos/icons/${name}.icns";
+    icon = "${configDir}/macos/icons/${name}.icns";
   };
 in
 {
-
-  # Make sure the nix daemon always runs
-  services.nix-daemon.enable = true;
+  # Disable management of the nix installation via nix-darwin since I'm using Determinate Nix
+  nix.enable = false;
 
   sops = {
     defaultSopsFile = "${home}/Git/config/secrets.yaml"; # Secrets Store
@@ -34,6 +34,9 @@ in
   };
 
   services.nextdns.enable = true;
+  # Manually start and stop the nextdns service with:
+  # `sudo launchctl bootout system /Library/LaunchDaemons/org.nixos.nextdns.plist`
+  # `sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.nextdns.plist`
   launchd.daemons.nextdns = {
     # Uncomment to enable logging
     # serviceConfig.StandardErrorPath = "/var/log/nextdns.log";
@@ -42,6 +45,12 @@ in
       toString (
         pkgs.writeShellScript "nextdns-config-watch" ''
           trap 'kill $(jobs -p); exit' SIGINT
+
+          # `nextdns activate` depends on `launchctl` and `networksetup`
+          export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+
+          # Make sure nextdns is activated
+          ${pkgs.nextdns}/bin/nextdns activate
 
           while true; do
             # Start long-running nextdns process in the background
@@ -53,11 +62,14 @@ in
             if ! [ -d /run/secrets.d/ ]; then
               echo "Secrets volume not yet mounted. This script will restart when it is."
               /bin/wait4path /run/secrets.d/ &
+            elif ! [ -e /run/secrets/ ]; then
+              echo "Secrets not yet created. Restart the script."
+              exit &
+            else
+              # Monitor symlink and config file in background
+              # fswatch will exit when those paths are modified
+              ${pkgs.fswatch}/bin/fswatch -1 ${config.sops.secrets.nextdns-config.path} > /dev/null &
             fi
-
-            # Monitor symlink and config file in background
-            # fswatch will exit when those paths are modified
-            ${pkgs.fswatch}/bin/fswatch -1 ${config.sops.secrets.nextdns-config.path} > /dev/null &
 
             # Wait for at least one process to exit
             wait -n
@@ -90,6 +102,7 @@ in
 
   users.users.knaggit.home = home;
 
+  # Your Terminal emulator might need Full Disk Access to change icons for all applications
   environment.customIcons = {
     enable = true;
     icons = map appicon [
@@ -99,6 +112,15 @@ in
       "Notion"
       "Visual Studio Code"
     ];
+  };
+
+  system.primaryUser = "nik";
+
+  # Enable Touch ID for sudo
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+    reattach = true; # Fixes Touch ID for sudo inside tmux and screen
   };
 
   system.defaults.finder = {
@@ -197,29 +219,47 @@ in
     #  ]
   };
 
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToEscape = true;
-  };
-
-  system.activationScripts.postUserActivation = {
+  system.activationScripts.postActivation = {
     text = ''
       # Set default shell to fish
       sudo chsh -s /run/current-system/sw/bin/fish knaggit
 
-      # Disable "Select the previous input source", because I use Ctrl + Space in Tmux
-      defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '<dict><key>enabled</key><false/></dict>'
+      # Run the following script as user nik
+      sudo -i -u nik bash <<'EOF'
 
-      # Disable "Show Spotlight search", because I use Cmd + Space for Raycast
-      defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><true/></dict>'
+        # Run batt service
+        sudo brew services restart batt
 
-      # Activate settings so we don't have to restart
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+        # Disable 'Select the previous input source', because I use Ctrl + Space in Tmux
+        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '<dict><key>enabled</key><false/></dict>'
+
+        # Disable 'Show Spotlight search', because I use Cmd + Space for Raycast
+        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
+
+        # Activate settings so we don't have to restart
+        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
+        # Install keyboard shortcuts
+        ${pkgs.bun}/bin/bun run --cwd=${configDir}/macos/karabiner/ build
+        ${pkgs.bun}/bin/bun run --cwd=${configDir}/macos/phoenix/ build
+
+        # Configure Final Cut to enable timeline rendering during playback
+        defaults write com.apple.FinalCut FFSuspendBGOpsDuringPlay 0
+
+        # Configure Apple Mail
+        defaults write com.apple.mail ShowCcHeader 0
+        defaults write com.apple.mail EnableContactPhotos 1
+        defaults write com.apple.mail NSFont SFPro-Regular
+        defaults write com.apple.mail NSFontSize 12
+
+        # Disable autoupgrade - Use `brew cu -aqy` to upgrade apps
+        defaults write com.DanPristupov.Fork SUEnableAutomaticChecks -bool false
+        defaults write com.proxyman.NSProxy isUsingSystemStatusBar -bool false
+        defaults write com.proxyman.NSProxy shouldShowUpdatePopup -bool false
+
+      EOF
     '';
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   homebrew = {
     enable = true;
@@ -227,11 +267,14 @@ in
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-      cleanup = "zap";
+      # `zap` will move related files of apps that are removed to the trash
+      # cleanup = "zap";
+      # This will force an overwrite of apps already present
+      extraFlags = [ "--force" ];
     };
 
     taps = [
-      # Upgrade casks with `brew cu -a`
+      # Upgrade casks with `brew cu -aqy`
       "buo/cask-upgrade"
       "mongodb/brew"
     ];
@@ -243,7 +286,7 @@ in
       "iftop" # Display an interface's bandwidth usage
 
       "irssi" # Modular IRC client
-      "mongodb-community@8.0"
+      # "mongodb-community@8.0"
       "neovim" # Ambitious Vim-fork focused on extensibility and agility
       "zbar" # Suite of barcodes-reading tools
 
@@ -265,6 +308,7 @@ in
       "yubikey-personalization" # YubiKey personalization library and tool
       "ykman" # Tool for managing your YubiKey configuration
       "gnupg" # GNU Pretty Good Privacy (PGP) package
+      "batt" # Battery manager
     ];
 
     casks = [
@@ -275,17 +319,18 @@ in
       "font-lexend"
       "font-montserrat"
       "font-open-sans"
-      "font-poppins"
       "font-palanquin"
+      "font-poppins"
       "font-roboto"
-      "font-space-grotesk"
+      "font-sf-pro"
       "font-source-sans-3"
+      "font-space-grotesk"
 
       # Nerd Fonts
+      "font-anonymous-pro"
+      "font-hack-nerd-font"
       "font-jetbrains-mono-nerd-font"
       "font-sauce-code-pro-nerd-font"
-      "font-hack-nerd-font"
-      "font-anonymous-pro"
 
       # Work
       "figma" # Collaborative team software
@@ -323,16 +368,76 @@ in
       "notion" # App to write, plan, collaborate, and get organised
       "numi" # Calculator and converter application
       "omnigraffle" # Visual communication software
+      "obsidian" # Knowledge base that works on top of a local folder of plain text Markdown files
       "qlmarkdown" # Quick Look generator for Markdown files
       "raindropio" # Bookmark manager
       "rwts-pdfwriter" # Print driver for printing documents directly to a pdf file
+      "scroll-reverser" # Set mouse scroll directions independently
       "signal" # Instant messaging application focusing on security
       "timemator" # Automatic time-tracking application
       "the-unarchiver" # Unpacks archive files
       # "topnotch" # Utility to hide the notch
       "visual-studio-code" # Open-source code editor
       "vlc" # Multimedia player
+      "yubico-authenticator" # Application for configuring YubiKeys
       "zoom" # Video communication and virtual meeting platform
+
+      # Web browser
+      "arc" # Chromium based browser
+      "chatgpt-atlas" # OpenAI's browser with ChatGPT built in
+      "finicky" # Utility for customizing which browser to start
+      "firefox" # Web browser
+      "helium-browser" # Chromium based browser
+      "ungoogled-chromium" # Chromium based browser with privacy in mind
+
+      # Graphic & Image Applications
+      "affinity" # Image editing and design software
+      "figma" # Collaborative team software
+      "imageoptim" # Tool to optimise images to a smaller size
+
+      # Audio & Music Applications
+      "ableset" # Live setlist manager for Ableton
+      "ableton-live-standard" # Music production software
+      "audacity" # Cross-platform audio software
+      "blackhole-2ch" # Virtual Audio Driver
+      "motu-m-series" # Driver for Motu M-Series audio interfaces
+      "musescore" # Open-source music notation software
+      "native-access" # Installer for Native Instruments products
+
+      # Audio Plugins
+      "fabfilter-pro-q" # Equalizer
+      "fabfilter-pro-l" # Limiter
+      "fabfilter-pro-c" # Compressor
+      "fabfilter-pro-mb" # Multi-band compressor
+      "fabfilter-saturn" # Saturation
+      "youlean-loudness-meter" # Loudness Meter
+      "tdr-prism" # Frequency analyzer
+
+      # Productivity
+      "anytype" # Local-first and end-to-end encrypted notes app
+      "craft" # Personal knowledge management
+      "missive" # Team inbox and chat tool
+      "nota" # Markdown files editor
+      "notion-calendar" # Calendar by Notion
+      "notion" # App to write, plan, collaborate, and get organised
+      "obsidian" # Knowledge base that works on top of a local folder of plain text Markdown files
+      "raindropio" # Bookmark manager
+
+      # Development
+      "bruno" # API client
+      "cyberduck" # Server and cloud storage browser
+      "dbngin" # Database version management tool
+      "fork" # Git client
+      "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
+      "kitty" # GPU-based terminal emulator
+      "orbstack" # Replacement for Docker Desktop
+      "proxyman" # HTTP debugging proxy
+      "tableplus" # Native GUI tool for relational databases
+      "tuple" # Remote pair programming app
+      "visual-studio-code" # Open-source code editor
+      "warp" # Rust-based terminal
+      "wireshark-app" # Network protocol analyzer
+      "zed" # Code editor
     ];
   };
 

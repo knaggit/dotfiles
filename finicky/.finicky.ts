@@ -1,16 +1,19 @@
 // Finicky on GitHub: https://github.com/johnste/finicky
 // Search for integration on GitHub: https://github.com/search?q=filename%3A.finicky.js+Spotify&type=Code
 
-module.exports = {
+import type { FinickyConfig } from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
+
+export default {
   defaultBrowser: "Arc",
   options: {
+    checkForUpdates: false,
     hideIcon: true,
-    checkForUpdate: false
+    logRequests: false,
   },
   handlers: [
     {
       match: "meet.google.com/*",
-      browser: "Arc"
+      browser: "Arc",
     },
     {
       match: "open.spotify.com/*",
@@ -22,15 +25,15 @@ module.exports = {
     },
     {
       match: /notion\.so\/.*[a-f0-9]{32}/,
-      browser: "Notion"
+      browser: "Notion",
     },
     {
       match: "mail.missiveapp.com/*",
-      browser: "Missive"
+      browser: "Missive",
     },
     {
       match: "www.figma.com/file/*",
-      browser: "Figma"
-    }
-  ]
-}
+      browser: "Figma",
+    },
+  ],
+} satisfies FinickyConfig;

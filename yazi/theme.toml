@@ -1,6 +1,6 @@
 "$schema" = "https://raw.githubusercontent.com/yazi-rs/schemas/main/schemas/theme.json"
 
-[manager]
+[mgr]
 border_symbol = " "
 
 # from https://raw.githubusercontent.com/vampirelinux/css/master/ayu-mirage.tmTheme

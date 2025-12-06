@@ -3,18 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.05";
-    darwin = {
-      # nix will normally use the nixpkgs defined in home-managers inputs, we only want one copy of nixpkgs though
-      url = "github:niklasravnsborg/nix-darwin";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    systems.url = "github:nix-systems/default";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    darwin-custom-icons = {
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      inputs.brew-src.url = "github:Homebrew/brew/4.6.7";
+    };
+    nix-darwin-custom-icons = {
       url = "github:ryanccn/nix-darwin-custom-icons";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       # home dir
@@ -24,38 +24,87 @@
   };
 
   outputs =
-    {
-      nixpkgs,
-      darwin,
-      darwin-custom-icons,
-      home-manager,
-      sops-nix,
-      ...
-    }@inputs:
+    inputs:
     let
-      sharedModules = [
-        ./tmux/tmux-module.nix
-      ];
-    in
-    {
+      systems = {
+        darwin = "aarch64-darwin";
+        nixos = "x86_64-linux";
+      };
+      myNixpkgs =
+        system:
+        import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      secretsPath = builtins.toString inputs.dotfiles-secrets;
+      homeManagerConfig = {
+        useGlobalPkgs = true;
+        users.nik = import ./nix/home.nix;
+        sharedModules = [
+          ./tmux/tmux-module.nix
 
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
-
-      darwinConfigurations."Karrajor" = darwin.lib.darwinSystem {
-        system = "aarch64-darwin"; # "x86_64-darwin" if you're using a pre M1 mac
+        ];
+        extraSpecialArgs = {
+          inherit secretsPath;
+        };
+      };
+      darwinSystem = inputs.nix-darwin.lib.darwinSystem {
+        system = systems.darwin;
+        specialArgs = {
+          inherit secretsPath;
+          pkgs = myNixpkgs systems.darwin;
+        };
         modules = [
           ./nix/darwin.nix
-          darwin-custom-icons.darwinModules.default
-          sops-nix.darwinModules.sops
-          home-manager.darwinModules.home-manager
+          inputs.nix-darwin-custom-icons.darwinModules.default
+          inputs.home-manager.darwinModules.home-manager
+          inputs.nix-homebrew.darwinModules.nix-homebrew
           {
-            home-manager = {
-              useGlobalPkgs = true;
-              users.knaggit = import ./nix/home.nix;
-              inherit sharedModules;
+            home-manager = homeManagerConfig // {
+              sharedModules = homeManagerConfig.sharedModules ++ [
+                ./macos/file-associations
+              ];
+            };
+            nix-homebrew = {
+              enable = true;
+              user = "nik";
             };
           }
         ];
       };
+
+      # Small tool to iterate over each systems
+      eachSystem =
+        f:
+        inputs.nixpkgs.lib.genAttrs (import inputs.systems) (
+          system: f inputs.nixpkgs.legacyPackages.${system}
+        );
+
+      # Eval the treefmt modules from ./treefmt.nix
+      treefmtEval = eachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+
+    in
+    {
+      # for `nix fmt`
+      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+
+      # for `nix flake check`
+      checks = eachSystem (pkgs: {
+        formatting = treefmtEval.${pkgs.system}.config.build.check inputs.self;
+      });
+
+      # development environment, enabled via `.envrc`
+      devShell = eachSystem (
+        pkgs:
+        pkgs.mkShell {
+          packages = with pkgs; [
+            nixd
+            nixfmt
+          ];
+        }
+      );
+
+      darwinConfigurations."Karrajor" = darwinSystem;
+
     };
 }

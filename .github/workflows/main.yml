@@ -1,0 +1,21 @@
+name: Format Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository 📁
+        uses: actions/checkout@v4
+
+      - name: Install Nix 📦
+        uses: cachix/install-nix-action@v24
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check formatting 📝
+        run: nix fmt -- --fail-on-change

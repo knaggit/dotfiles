@@ -1,0 +1,12 @@
+/*
+ * Custom CSS Styles for AbleSet, modify at your own risk.
+ * Learn more at: https://ableset.app/docs/custom-styles/
+ */
+
+:root {
+  --color-background-deep: #000000;
+}
+
+.performance-title {
+  display: none;
+}

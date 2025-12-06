@@ -4,5 +4,12 @@ font-size = 14
 adjust-cell-height = 10%
 window-padding-x = 20
 window-padding-y = 10
+
 # command = TERM=xterm-256color /usr/bin/bash
 clipboard-paste-protection = false
+
+# Maximize default window
+window-width = 173
+window-height = 43
+
+auto-update = off

@@ -1,0 +1,10 @@
+{
+  "name": "karabiner-config",
+  "private": true,
+  "scripts": {
+    "build": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "karabiner.ts": "^1.35.1"
+  }
+}
