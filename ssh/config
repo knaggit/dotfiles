@@ -8,6 +8,10 @@
 #  ControlMaster auto
 #  ControlPath ~/.ssh/master-%r@%h:%p
 #  ControlPersist 300
+Host n8n
+  User mngi
+  HostName 202.61.229.23
+  IdentityFile ~/.ssh/clinara
 Host github.com
   User git
   ControlMaster no
@@ -15,8 +19,12 @@ Host github.com
   IdentityFile ~/.ssh/github
   MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
 Host rpi
-  HostName 10.10.12.50
+  HostName 10.10.12.91
   User rpi
+  IdentityFile ~/.ssh/yk5nfc-blue-work
+Host vm
+  HostName 192.168.179.96
+  User spiritism7751
   IdentityFile ~/.ssh/yk5nfc-blue-work
 Host *
   #ControlMaster auto
