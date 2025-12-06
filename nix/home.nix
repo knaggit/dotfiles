@@ -338,10 +338,12 @@ in
     settings = {
       promptToReturnFromSubprocess = false;
       git = {
-        paging = {
-          colorArg = "always";
-          pager = "delta --paging=never";
-        };
+        pagers = [
+          {
+            colorArg = "always";
+            pager = "delta --paging=never";
+          }
+        ];
         commit = {
           autoWrapCommitMessage = false;
         };

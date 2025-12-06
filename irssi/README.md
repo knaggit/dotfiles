@@ -2,14 +2,14 @@
 
 # .irssi
 
-a quick bootstrap to get running with irssi. aimed at use with one server mainly. 
+a quick bootstrap to get running with irssi. aimed at use with one server mainly.
 
 ### features
 
-- config configurator: irssi is somewhat perplexing to newer users. this takes some of the guesswork out of it by automating the creation of a sane default config, with your information inserted and ready to go. 
-- tweaked theme: something of a derivative of the popular 'weed' theme sans bloat, and the 'industrial' theme. 
+- config configurator: irssi is somewhat perplexing to newer users. this takes some of the guesswork out of it by automating the creation of a sane default config, with your information inserted and ready to go.
+- tweaked theme: something of a derivative of the popular 'weed' theme sans bloat, and the 'industrial' theme.
 - goodies: figlet generator, dau/dau mode, pangotext included, so you can get right to being banned for spamming/flooding! :)
-- quality-of-life goodies: tweaked statusbar will display cpu load. user names are color-coded. 
+- quality-of-life goodies: tweaked statusbar will display cpu load. user names are color-coded.
 
 ## UPDATE Oct 2020
 
@@ -19,28 +19,28 @@ simple questions!
 
 the config generator is geared towards a one-server setup, with one main
 chatroom. adding either more rooms to auto-join, or more servers, will require
-manually editing the config file generated here. 
+manually editing the config file generated here.
 
 **WARNING** re-running the config generator will erase and create a new config
 file!
 
-## install 
+## install
 
-if you have an irssi setup, either delete it or back it up: 
+if you have an irssi setup, either delete it or back it up:
 
 ```
 cd ~ && mv .irssi .old-irssi
 ```
 
 ```
-cd ~ && rm -rf .irssi 
+cd ~ && rm -rf .irssi
 ```
 
 clone this repo to your home directory, or wherever `irssi` looks for the config:
 
 ```
 cd ~
-git clone https://github.com/jeromescuggs/.irssi 
+git clone https://github.com/jeromescuggs/.irssi
 ```
 
 navigate to the newly cloned directory, and run `create-config.sh`. you will be
