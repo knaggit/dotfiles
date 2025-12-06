@@ -239,6 +239,8 @@ in
     brews = [
       # Although we already have it in home-manager, this gpg binary is the only one that Fork can find
       "cloudflared" # Cloudflare Tunnel client (formerly Argo Tunnel)
+      "asn" # OSINT command line tool for investigating network data
+      "iftop" # Display an interface's bandwidth usage
 
       "irssi" # Modular IRC client
       "mongodb-community@8.0"

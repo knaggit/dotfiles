@@ -29,6 +29,11 @@ in
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
+    # osint
+    mtr # Network diagnostics tool
+    # ngrok # Reverse proxy, secure tunnels to localhost
+    trippy # # Network diagnostic tool
+
     #   act # Run GitHub Actions locally
     age # Secure file encryption
     any-nix-shell # Run nix-shell in any directory
@@ -51,8 +56,6 @@ in
     instaloader # Download pictures (or videos) along with their captions and other metadata from Instagram
     khal # CLI calendar application
     #   micromamba # Environment manager
-    mtr
-    #   ngrok # Reverse proxy, secure tunnels to localhost
     #   nodePackages.svgo # Optimize SVGs
     #   nushell # Modern alternative shell
     #   pandoc # Document conversion
@@ -61,7 +64,6 @@ in
     sops # Editor of encrypted files
     tlrc # client for tldr: collaborative cheatsheets for console commands
     #   tree # Display directories as trees
-    trippy
     #   watch # Execute a program periodically
     vdirsyncer # Synchronize calendars and contacts
     wget # tool for downloading files from the web
