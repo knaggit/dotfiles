@@ -44,7 +44,8 @@ in
     #   act # Run GitHub Actions locally
     age # Secure file encryption
     any-nix-shell # Run nix-shell in any directory
-    atuin # Universal history
+    # atuin # Universal history
+    bat # Clone of cat with syntax highlighting and Git integration
     btop # Monitor of resources
     bun # Incredibly fast JavaScript runtime
     cloc # Count lines of code
@@ -56,7 +57,7 @@ in
     ffmpeg_7 # Play, record, convert, and stream audio and video
     gh # GitHub command-line tool
     git # Version control system
-    gitui # Terminal ui for git
+    # gitui # Terminal ui for git
     gnused # GNU version of the famous stream editor
     gnutar # GNU version of the tar archiving utility
     helix # Post-modern modal text editor
@@ -71,7 +72,7 @@ in
     #   pandoc # Document conversion
     qrrs # CLI QR code generator and reader written in rust
     #   restic # Backup program
-    sops # Editor of encrypted files
+    # sops # Editor of encrypted files
     tlrc # client for tldr: collaborative cheatsheets for console commands
     #   tree # Display directories as trees
     #   watch # Execute a program periodically
@@ -98,7 +99,7 @@ in
   ];
 
   home.file = {
-    ".config/atuin/config.toml" = dotfile "atuin/config.toml";
+    # ".config/atuin/config.toml" = dotfile "atuin/config.toml";
     ".config/btop/btop.conf" = dotfile "btop/btop.conf";
     ".config/ghostty/config" = dotfile "ghostty/config";
     ".config/gitui/key_bindings.ron" = dotfile "gitui/key_bindings.ron";
@@ -113,10 +114,10 @@ in
     ".config/posting/config.yaml" = dotfile "posting/config.yaml";
     ".config/starship.toml" = dotfile "starship/starship.toml";
     ".config/vdirsyncer/config" = dotfile "vdirsyncer/config";
-    ".config/yazi/init.lua" = dotfile "yazi/init.lua";
-    ".config/yazi/keymap.toml" = dotfile "yazi/keymap.toml";
-    ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";
-    ".config/yazi/yazi.toml" = dotfile "yazi/yazi.toml";
+    # ".config/yazi/init.lua" = dotfile "yazi/init.lua";
+    # ".config/yazi/keymap.toml" = dotfile "yazi/keymap.toml";
+    # ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";
+    # ".config/yazi/yazi.toml" = dotfile "yazi/yazi.toml";
     ".env.sh" = dotfile "shell/.env.sh";
     ".finicky.js" = dotfile "finicky/.finicky.js";
     ".gitconfig" = dotfile "git/.gitconfig";
@@ -127,7 +128,6 @@ in
     ".ssh/config" = dotfile "ssh/config";
     ".svgo.config.js" = dotfile "svgo/.svgo.config.js";
     ".vimrc" = dotfile "vim/.vimrc";
-    "/Users/nik/Library/Application Support/ableset/custom-styles/styles.css" =
     "Library/LaunchAgents/gnupg.gpg-agent.plist" = dotfile "gpg/gnupg.gpg-agent.plist";
   };
 
@@ -135,28 +135,24 @@ in
   # For some programs (e.g. `sops`) on macOS this is needed, because they would otherwise look for their config files in `~/Library/Application Support`.
   xdg.enable = true;
 
-  sops = {
-    defaultSopsFile = "${secretsPath}/secrets.yaml";
-    age.keyFile = "${homePath}/.config/sops/age/keys.txt";
-    secrets = {
-      "atuin/username" = { };
-      "atuin/password" = { };
-      "atuin/key" = {
-        path = "${homePath}/.local/share/atuin/key";
-      };
-    };
-  };
-
-  # This sets the `XDG_CONFIG_HOME` environment variable to `~/.config`.
-  # For some programs (e.g. `sops`) on macOS this is needed, because they would otherwise look for their config files in `~/Library/Application Support`.
-  xdg.enable = true;
+  # sops = {
+  #   defaultSopsFile = "${secretsPath}/secrets.yaml";
+  #   age.keyFile = "${homePath}/.config/sops/age/keys.txt";
+  #   secrets = {
+  #     "atuin/username" = { };
+  #     "atuin/password" = { };
+  #     "atuin/key" = {
+  #       path = "${homePath}/.local/share/atuin/key";
+  #     };
+  #   };
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.fish = {
     enable = true;
-    shellInitLast = "source ~/dotfiles/fish/config.fish";
+    shellInitLast = "source ~/Git/dotfiles/fish/config.fish";
     shellAliases = shellAliases;
     plugins = [
       {
@@ -229,8 +225,8 @@ in
         bindkey "^[[1;3D" backward-word
 
         # Setup Atuin
-        eval "$(ATUIN_NOBIND=true atuin init zsh)"
-        bindkey '^a' atuin-search
+        # eval "$(ATUIN_NOBIND=true atuin init zsh)"
+        # bindkey '^a' atuin-search
 
         # This adds a blank line before each command output for better readability
         function precmd { echo }

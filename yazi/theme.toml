@@ -4,7 +4,7 @@
 border_symbol = " "
 
 # from https://raw.githubusercontent.com/vampirelinux/css/master/ayu-mirage.tmTheme
-syntect_theme = "~/dotfiles/yazi/ayu-mirage.tmTheme"
+syntect_theme = "~/Git/dotfiles/yazi/ayu-mirage.tmTheme"
 
 # Darkened background for selection
 hovered = { bg = "#363A4F" }

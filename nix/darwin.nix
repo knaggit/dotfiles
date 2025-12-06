@@ -19,82 +19,82 @@ in
   # Disable management of the nix installation via nix-darwin since I'm using Determinate Nix
   nix.enable = false;
 
-  sops = {
-    defaultSopsFile = "${home}/Git/config/secrets.yaml"; # Secrets Store
-    age.keyFile = "${home}/.config/sops/age/keys.txt"; # Private Key
-    validateSopsFiles = false; # temporary
-    # Disable automatic key generation
-    age.sshKeyPaths = [ ];
-    gnupg.sshKeyPaths = [ ];
+  # sops = {
+  #   defaultSopsFile = "${home}/Git/config/secrets.yaml"; # Secrets Store
+  #   age.keyFile = "${home}/.config/sops/age/keys.txt"; # Private Key
+  #   validateSopsFiles = false; # temporary
+  #   # Disable automatic key generation
+  #   age.sshKeyPaths = [ ];
+  #   gnupg.sshKeyPaths = [ ];
 
-    secrets = {
-      nextdns-config = { };
-      # irssi = { };
-    };
-  };
+  #   secrets = {
+  #     nextdns-config = { };
+  #     # irssi = { };
+  #   };
+  # };
 
-  services.nextdns.enable = true;
-  # Manually start and stop the nextdns service with:
-  # `sudo launchctl bootout system /Library/LaunchDaemons/org.nixos.nextdns.plist`
-  # `sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.nextdns.plist`
-  launchd.daemons.nextdns = {
-    # Uncomment to enable logging
-    # serviceConfig.StandardErrorPath = "/var/log/nextdns.log";
-    # serviceConfig.StandardOutPath = "/var/log/nextdns.log";
-    command = mkForce (
-      toString (
-        pkgs.writeShellScript "nextdns-config-watch" ''
-          trap 'kill $(jobs -p); exit' SIGINT
+  # services.nextdns.enable = true;
+  # # Manually start and stop the nextdns service with:
+  # # `sudo launchctl bootout system /Library/LaunchDaemons/org.nixos.nextdns.plist`
+  # # `sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.nextdns.plist`
+  # launchd.daemons.nextdns = {
+  #   # Uncomment to enable logging
+  #   # serviceConfig.StandardErrorPath = "/var/log/nextdns.log";
+  #   # serviceConfig.StandardOutPath = "/var/log/nextdns.log";
+  #   command = mkForce (
+  #     toString (
+  #       pkgs.writeShellScript "nextdns-config-watch" ''
+  #         trap 'kill $(jobs -p); exit' SIGINT
 
-          # `nextdns activate` depends on `launchctl` and `networksetup`
-          export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+  #         # `nextdns activate` depends on `launchctl` and `networksetup`
+  #         export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 
-          # Make sure nextdns is activated
-          ${pkgs.nextdns}/bin/nextdns activate
+  #         # Make sure nextdns is activated
+  #         ${pkgs.nextdns}/bin/nextdns activate
 
-          while true; do
-            # Start long-running nextdns process in the background
-            ${pkgs.nextdns}/bin/nextdns run --config-file=${config.sops.secrets.nextdns-config.path} &
-            nextdns_pid=$!
+  #         while true; do
+  #           # Start long-running nextdns process in the background
+  #           ${pkgs.nextdns}/bin/nextdns run --config-file=${config.sops.secrets.nextdns-config.path} &
+  #           nextdns_pid=$!
 
-            # If the tmpfs is not yet mounted, the file watchers won't trigger on change
-            # wait4path will exit when the path is mounted
-            if ! [ -d /run/secrets.d/ ]; then
-              echo "Secrets volume not yet mounted. This script will restart when it is."
-              /bin/wait4path /run/secrets.d/ &
-            elif ! [ -e /run/secrets/ ]; then
-              echo "Secrets not yet created. Restart the script."
-              exit &
-            else
-              # Monitor symlink and config file in background
-              # fswatch will exit when those paths are modified
-              ${pkgs.fswatch}/bin/fswatch -1 ${config.sops.secrets.nextdns-config.path} > /dev/null &
-            fi
+  #           # If the tmpfs is not yet mounted, the file watchers won't trigger on change
+  #           # wait4path will exit when the path is mounted
+  #           if ! [ -d /run/secrets.d/ ]; then
+  #             echo "Secrets volume not yet mounted. This script will restart when it is."
+  #             /bin/wait4path /run/secrets.d/ &
+  #           elif ! [ -e /run/secrets/ ]; then
+  #             echo "Secrets not yet created. Restart the script."
+  #             exit &
+  #           else
+  #             # Monitor symlink and config file in background
+  #             # fswatch will exit when those paths are modified
+  #             ${pkgs.fswatch}/bin/fswatch -1 ${config.sops.secrets.nextdns-config.path} > /dev/null &
+  #           fi
 
-            # Wait for at least one process to exit
-            wait -n
-            exit_code=$?
+  #           # Wait for at least one process to exit
+  #           wait -n
+  #           exit_code=$?
 
-            # Check if the nextdns process has exited
-            if ! /bin/ps -p $nextdns_pid > /dev/null; then
-              echo "Process has exited with code $exit_code. Exiting script."
-              exit $exit_code
-            fi
+  #           # Check if the nextdns process has exited
+  #           if ! /bin/ps -p $nextdns_pid > /dev/null; then
+  #             echo "Process has exited with code $exit_code. Exiting script."
+  #             exit $exit_code
+  #           fi
 
-            # Kill all other running processes
-            echo "A monitored file was changed. Restarting."
-            pids=$(jobs -p)
-            kill $pids 2> /dev/null
-            wait $pids
+  #           # Kill all other running processes
+  #           echo "A monitored file was changed. Restarting."
+  #           pids=$(jobs -p)
+  #           kill $pids 2> /dev/null
+  #           wait $pids
 
-            # Before restarting the loop, let's sleep for 100 ms
-            echo "Restarting in 100 ms..."
-            /bin/sleep 0.1
-          done
-        ''
-      )
-    );
-  };
+  #           # Before restarting the loop, let's sleep for 100 ms
+  #           echo "Restarting in 100 ms..."
+  #           /bin/sleep 0.1
+  #         done
+  #       ''
+  #     )
+  #   );
+  # };
 
   # Create sourcings for zsh and fish
   programs.zsh.enable = true;
@@ -114,7 +114,7 @@ in
     ];
   };
 
-  system.primaryUser = "nik";
+  system.primaryUser = "knaggit";
 
   # Enable Touch ID for sudo
   security.pam.services.sudo_local = {
@@ -224,8 +224,8 @@ in
       # Set default shell to fish
       sudo chsh -s /run/current-system/sw/bin/fish knaggit
 
-      # Run the following script as user nik
-      sudo -i -u nik bash <<'EOF'
+      # Run the following script as user knaggit
+      sudo -i -u knaggit bash <<'EOF'
 
         # Run batt service
         sudo brew services restart batt
@@ -247,10 +247,10 @@ in
         defaults write com.apple.FinalCut FFSuspendBGOpsDuringPlay 0
 
         # Configure Apple Mail
-        defaults write com.apple.mail ShowCcHeader 0
-        defaults write com.apple.mail EnableContactPhotos 1
-        defaults write com.apple.mail NSFont SFPro-Regular
-        defaults write com.apple.mail NSFontSize 12
+        # defaults write com.apple.mail ShowCcHeader 0
+        # defaults write com.apple.mail EnableContactPhotos 1
+        # defaults write com.apple.mail NSFont SFPro-Regular
+        # defaults write com.apple.mail NSFontSize 12
 
         # Disable autoupgrade - Use `brew cu -aqy` to upgrade apps
         defaults write com.DanPristupov.Fork SUEnableAutomaticChecks -bool false
@@ -346,7 +346,6 @@ in
       "audio-hijack" # Records audio from any application
       "balenaetcher" # Flashing tool for linux distros on USB
       "bitwarden" # Desktop password and login vault
-      "blackhole-2ch" # Virtual Audio Driver
       "coconutbattery" # Tool to show live information about the batteries in various devices
       "cursor" # Write, edit, and chat about your code with AI
       "cyberduck" # Server and cloud storage browser
@@ -384,44 +383,34 @@ in
 
       # Web browser
       "arc" # Chromium based browser
-      "chatgpt-atlas" # OpenAI's browser with ChatGPT built in
+      # "chatgpt-atlas" # OpenAI's browser with ChatGPT built in
       "finicky" # Utility for customizing which browser to start
-      "firefox" # Web browser
-      "helium-browser" # Chromium based browser
-      "ungoogled-chromium" # Chromium based browser with privacy in mind
+      # "firefox" # Web browser
+      # "helium-browser" # Chromium based browser
+      # "ungoogled-chromium" # Chromium based browser with privacy in mind
 
       # Graphic & Image Applications
-      "affinity" # Image editing and design software
+      # "affinity" # Image editing and design software
       "figma" # Collaborative team software
       "imageoptim" # Tool to optimise images to a smaller size
 
       # Audio & Music Applications
-      "ableset" # Live setlist manager for Ableton
-      "ableton-live-standard" # Music production software
-      "audacity" # Cross-platform audio software
+      # "audacity" # Cross-platform audio software
       "blackhole-2ch" # Virtual Audio Driver
       "motu-m-series" # Driver for Motu M-Series audio interfaces
       "musescore" # Open-source music notation software
-      "native-access" # Installer for Native Instruments products
-
-      # Audio Plugins
-      "fabfilter-pro-q" # Equalizer
-      "fabfilter-pro-l" # Limiter
-      "fabfilter-pro-c" # Compressor
-      "fabfilter-pro-mb" # Multi-band compressor
-      "fabfilter-saturn" # Saturation
-      "youlean-loudness-meter" # Loudness Meter
-      "tdr-prism" # Frequency analyzer
+      # "native-access" # Installer for Native Instruments products
 
       # Productivity
       "anytype" # Local-first and end-to-end encrypted notes app
-      "craft" # Personal knowledge management
-      "missive" # Team inbox and chat tool
-      "nota" # Markdown files editor
-      "notion-calendar" # Calendar by Notion
+      # "craft" # Personal knowledge management
+      # "missive" # Team inbox and chat tool
+      # "nota" # Markdown files editor
+      # "notion-calendar" # Calendar by Notion
       "notion" # App to write, plan, collaborate, and get organised
       "obsidian" # Knowledge base that works on top of a local folder of plain text Markdown files
       "raindropio" # Bookmark manager
+      "karabiner-elements"
 
       # Development
       "bruno" # API client
@@ -430,12 +419,12 @@ in
       "fork" # Git client
       "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
       "kitty" # GPU-based terminal emulator
-      "orbstack" # Replacement for Docker Desktop
+      # "orbstack" # Replacement for Docker Desktop
       "proxyman" # HTTP debugging proxy
-      "tableplus" # Native GUI tool for relational databases
-      "tuple" # Remote pair programming app
-      "visual-studio-code" # Open-source code editor
-      "warp" # Rust-based terminal
+      # "tableplus" # Native GUI tool for relational databases
+      # "tuple" # Remote pair programming app
+      # "visual-studio-code" # Open-source code editor
+      # "warp" # Rust-based terminal
       "wireshark-app" # Network protocol analyzer
       "zed" # Code editor
     ];

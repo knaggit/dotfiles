@@ -11,8 +11,8 @@ end
 _spaced_prompts
 
 # Init Atuin
-ATUIN_NOBIND=true atuin init fish | source
-bind \ca _atuin_search
+# ATUIN_NOBIND=true atuin init fish | source
+# bind \ca _atuin_search
 
 # Config any-nix-shell
 any-nix-shell fish | source

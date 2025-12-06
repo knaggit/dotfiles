@@ -39,7 +39,7 @@
       secretsPath = builtins.toString inputs.dotfiles-secrets;
       homeManagerConfig = {
         useGlobalPkgs = true;
-        users.nik = import ./nix/home.nix;
+        users.knaggit = import ./nix/home.nix;
         sharedModules = [
           ./tmux/tmux-module.nix
 
@@ -67,7 +67,8 @@
             };
             nix-homebrew = {
               enable = true;
-              user = "nik";
+              user = "knaggit";
+              autoMigrate = true;
             };
           }
         ];

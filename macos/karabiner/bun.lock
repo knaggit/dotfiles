@@ -4,7 +4,7 @@
     "": {
       "name": "karabiner-config",
       "dependencies": {
-        "karabiner.ts": "^1.35.0",
+        "karabiner.ts": "^1.35.1",
       },
     },
   },
