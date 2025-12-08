@@ -24,7 +24,7 @@ let
     # Shortcuts
     c = "clear";
     o = "open .";
-    dot = "hx ~/dotfiles";
+    dot = "nvim ~/dotfiles";
   };
   homePath = config.home.homeDirectory;
   configDir = "${homePath}/Git/dotfiles";
@@ -39,7 +39,9 @@ in
     # osint
     mtr # Network diagnostics tool
     # ngrok # Reverse proxy, secure tunnels to localhost
-    trippy # # Network diagnostic tool
+    trippy # Network diagnostic tool
+
+    # opsec
 
     #   act # Run GitHub Actions locally
     age # Secure file encryption
@@ -102,12 +104,12 @@ in
     # ".config/atuin/config.toml" = dotfile "atuin/config.toml";
     ".config/btop/btop.conf" = dotfile "btop/btop.conf";
     ".config/ghostty/config" = dotfile "ghostty/config";
-    ".config/gitui/key_bindings.ron" = dotfile "gitui/key_bindings.ron";
-    ".config/gitui/theme.ron" = dotfile "gitui/theme.ron";
-    ".config/helix/config.toml" = dotfile "helix/config.toml";
-    ".config/helix/themes/my_theme.toml" = dotfile "helix/my_theme.toml";
+    # ".config/gitui/key_bindings.ron" = dotfile "gitui/key_bindings.ron";
+    # ".config/gitui/theme.ron" = dotfile "gitui/theme.ron";
+    # ".config/helix/config.toml" = dotfile "helix/config.toml";
+    # ".config/helix/themes/my_theme.toml" = dotfile "helix/my_theme.toml";
     ".config/khal/config" = dotfile "khal/config";
-    ".config/kitty/kitty.conf" = dotfile "kitty/kitty.conf";
+    # ".config/kitty/kitty.conf" = dotfile "kitty/kitty.conf";
     ".config/nix/nix.conf" = dotfile "nix/nix.conf";
     ".config/opencode/opencode.jsonc" = dotfile "opencode/opencode.jsonc";
     ".config/opencode/plugin/my-plugin.ts" = dotfile "opencode/plugin/my-plugin.ts";
@@ -119,7 +121,7 @@ in
     # ".config/yazi/theme.toml" = dotfile "yazi/theme.toml";
     # ".config/yazi/yazi.toml" = dotfile "yazi/yazi.toml";
     ".env.sh" = dotfile "shell/.env.sh";
-    ".finicky.js" = dotfile "finicky/.finicky.js";
+    ".finicky.js" = dotfile "finicky/.finicky.ts";
     ".gitconfig" = dotfile "git/.gitconfig";
     ".gpg.conf" = dotfile "gpg/gpg.conf";
     ".irssi/config" = dotfile "irssi/config";

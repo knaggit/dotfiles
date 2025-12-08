@@ -234,7 +234,7 @@ in
         defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '<dict><key>enabled</key><false/></dict>'
 
         # Disable 'Show Spotlight search', because I use Cmd + Space for Raycast
-        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
+        # defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
 
         # Activate settings so we don't have to restart
         /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
@@ -242,9 +242,6 @@ in
         # Install keyboard shortcuts
         ${pkgs.bun}/bin/bun run --cwd=${configDir}/macos/karabiner/ build
         ${pkgs.bun}/bin/bun run --cwd=${configDir}/macos/phoenix/ build
-
-        # Configure Final Cut to enable timeline rendering during playback
-        defaults write com.apple.FinalCut FFSuspendBGOpsDuringPlay 0
 
         # Configure Apple Mail
         # defaults write com.apple.mail ShowCcHeader 0
@@ -336,58 +333,46 @@ in
       "figma" # Collaborative team software
 
       # OpSec
+      "bitwarden"
       "yubico-authenticator" # Application for generating TOTP and HOTP codes
-      "yubico-yubikey-manager" # Application for configuring any YubiKey
+      # "yubico-yubikey-manager" # Application for configuring any YubiKey
       "wireshark" # Network protocol analyzer
 
       # Applications
-      "anki" # Memory training application
-      "arc" # Chromium based browser
+      # "anki" # Memory training application
       "audio-hijack" # Records audio from any application
-      "balenaetcher" # Flashing tool for linux distros on USB
-      "bitwarden" # Desktop password and login vault
+      # "balenaetcher" # Flashing tool for linux distros on USB
       "coconutbattery" # Tool to show live information about the batteries in various devices
       "cursor" # Write, edit, and chat about your code with AI
-      "cyberduck" # Server and cloud storage browser
       "daisydisk" # Disk space utility
       "discord" # Voice and text chat software
       "disk-drill" # Data recovery software
-      "figma" # Collaborative team software
       "finicky" # Utility for customizing which browser to start
-      "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
       "imageoptim" # Tool to optimise images to a smaller size
       "istat-menus@6" # iStat Menus vor top bar metrics of all ways
-      "kitty" # GPU-based terminal emulator
+      # "kitty" # GPU-based terminal emulator
       "logi-options+" # Logitech mouse configuration
       "loopback" # Cable-free audio router
-      "miro" # Online collaborative whiteboard platform
+      # "miro" # Online collaborative whiteboard platform
       "mos" # Smooths scrolling and set mouse scroll directions independently
       "musescore" # Open-source music notation software
-      "nota" # Markdown files editor
-      "notion" # App to write, plan, collaborate, and get organised
+      # "nota" # Markdown files editor
       "numi" # Calculator and converter application
       "omnigraffle" # Visual communication software
-      "obsidian" # Knowledge base that works on top of a local folder of plain text Markdown files
       "qlmarkdown" # Quick Look generator for Markdown files
       "raindropio" # Bookmark manager
       "rwts-pdfwriter" # Print driver for printing documents directly to a pdf file
-      "scroll-reverser" # Set mouse scroll directions independently
+      # "scroll-reverser" # Set mouse scroll directions independently
       "signal" # Instant messaging application focusing on security
       "timemator" # Automatic time-tracking application
       "the-unarchiver" # Unpacks archive files
       # "topnotch" # Utility to hide the notch
       "visual-studio-code" # Open-source code editor
       "vlc" # Multimedia player
-      "yubico-authenticator" # Application for configuring YubiKeys
       "zoom" # Video communication and virtual meeting platform
 
       # Web browser
       "arc" # Chromium based browser
-      # "chatgpt-atlas" # OpenAI's browser with ChatGPT built in
-      "finicky" # Utility for customizing which browser to start
-      # "firefox" # Web browser
-      # "helium-browser" # Chromium based browser
-      # "ungoogled-chromium" # Chromium based browser with privacy in mind
 
       # Graphic & Image Applications
       # "affinity" # Image editing and design software
@@ -407,6 +392,7 @@ in
       # "missive" # Team inbox and chat tool
       # "nota" # Markdown files editor
       # "notion-calendar" # Calendar by Notion
+      "moneymoney" # finance management with PSD2
       "notion" # App to write, plan, collaborate, and get organised
       "obsidian" # Knowledge base that works on top of a local folder of plain text Markdown files
       "raindropio" # Bookmark manager
@@ -414,6 +400,7 @@ in
 
       # Development
       "bruno" # API client
+      "codex" # OpenAI Codex
       "cyberduck" # Server and cloud storage browser
       "dbngin" # Database version management tool
       "fork" # Git client
@@ -423,6 +410,7 @@ in
       "proxyman" # HTTP debugging proxy
       # "tableplus" # Native GUI tool for relational databases
       # "tuple" # Remote pair programming app
+      "utm" # native virtualization of macos on macos
       # "visual-studio-code" # Open-source code editor
       # "warp" # Rust-based terminal
       "wireshark-app" # Network protocol analyzer
